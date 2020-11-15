@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/mdb.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar Holder -->
+      <nav id="sidebar" class="active yellow darken-1">
+        <div class="sidebar-header">
+          <h3 class="p-0 m-0"><img src="logo.png" height="80" alt="mdb logo" /><i id="sidebarCollapse2" class="fa fa-bars" style="float:right"></i></h3>
+          <strong id="sidebarCollapse"><i class="fa fa-bars"></i></strong>
+        </div>
+
+        <ul class="list-unstyled components">
+          <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+              <i class="fas fa-desktop"></i>
+              <span class="togname">Home<span>
+            </a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+              <li><a href="#">Home 1</a></li>
+              <li><a href="#">Home 2</a></li>
+              <li><a href="#">Home 3</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-briefcase"></i>
+              <span class="togname">About<span>
+            </a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+              <i class="fa fa-file"></i>
+              <span class="togname">Pages<span>
+            </a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+              <li><a href="#">Page 1</a></li>
+              <li><a href="#">Page 2</a></li>
+              <li><a href="#">Page 3</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-link"></i>
+              <span class="togname">Portofolio<span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-paperclip"></i>
+              <span class="togname">FAQ<span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-cog"></i>
+              <span class="togname">Contact<span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Page Content Holder -->
+    <div class="container-fluid m-0 p-0">
+      <div id="content">
+      <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark red accent-4 py-0">
+      <a class="navbar-brand py-0 my-0" href="#">
+        <img src="logo.png" height="60" alt="mdb logo" />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent-555"
+        aria-controls="navbarSupportedContent-555"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light"
+              >1
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+          <li class="nav-item avatar dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink-55"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                class="rounded-circle z-depth-0"
+                alt="avatar image"
+              />
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+              aria-labelledby="navbarDropdownMenuLink-55"
+            >
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--/.Navbar -->
+      <div class='contentwrap'>
+        <div class="container-fluid">
+
+        <div class="row">
+            s
+        </div>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/mdb.min.js"></script>
+    <script>
+      $(document).ready(function () {
+      if(!$("nav").hasClass("active")) {
+            $(".togname").show();
+        } else {
+$(".togname").hide();
+        }
+        $("#sidebarCollapse").on("click", function () {
+          $("#sidebar").toggleClass("active");
+          if(!$("nav").hasClass("active")) {
+            $(".togname").show();
+        } else {
+$(".togname").hide();
+        }
+        });
+        $("#sidebarCollapse2").on("click", function () {
+          $("#sidebar").toggleClass("active");
+          if(!$("nav").hasClass("active")) {
+            $(".togname").show()
+        } else {
+$(".togname").hide();
+        }
+        });
+        
+      });
+    </script>
+  </body>
+</html>
