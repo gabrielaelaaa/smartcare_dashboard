@@ -117,62 +117,62 @@ function voiceerlang(players) {
         }
     });
 }
-d3
-  .csv("http://localhost/Core_KQI_daily_tot_20201028.csv")
-  .then(voiceerlang);
-$(document).ready(function(){
-    d3.csv("Core_KQI_daily_tot_20201028.csv").then(function(data) {
-        // console.log(data[0]);
-        lastweek = data[data.length-2]['VLR Subscriber Register'];
-        nowweek = data[data.length-1]['VLR Subscriber Register'];
-        percentage = nowweek/lastweek*100;
-        increase = percentage-100;
-        console.log(increase.toFixed(2) + "%");
-        $('#vlrregister-persen').text(increase.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['VLR Subscriber Register']);
-        $('#vlrregister-sum').text(nFormatter(total,2) + " subs")
-        if(increase<0) {
-            $('#vlrregister-persen').css("color", "red");
-            $('#vlrregister-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#vlrregister-persen').css("color", "forestgreen");
-            $('#vlrregister-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-        }
-        lastweek = data[data.length-2]['VLR Subscriber Attach'];
-        nowweek = data[data.length-1]['VLR Subscriber Attach'];
-        percentage = nowweek/lastweek*100;
-        increase = percentage-100;
-        $('#vlrattach-persen').text(increase.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['VLR Subscriber Attach']);
-        $('#vlrattach-sum').text(nFormatter(total,2) + " subs")
-        if(increase<0) {
-            $('#vlrattach-persen').css("color", "red");
-            $('#vlrattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#vlrattach-persen').css("color", "forestgreen");
-            $('#vlrattach-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-        }
-        lastweek = data[data.length-2]['Voice (Erlang)'];
-        nowweek = data[data.length-1]['Voice (Erlang)'];
-        percentage = (nowweek/lastweek*100)-100;
-        $('#voicetotal-persen').text(percentage.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['Voice (Erlang)']);
-        $('#voicetotal-sum').text(nFormatter(total,2) + " subs")
-        if(percentage<0) {
-            $('#voicetotal-persen').css("color", "red");
-            $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#voicetotal-persen').css("color", "forestgreen");
-            $('#voicetotal-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-        }
-      });
-});
+// d3
+//   .csv("http://localhost/Core_KQI_daily_tot_20201028.csv")
+//   .then(voiceerlang);
+// $(document).ready(function(){
+//     d3.csv("Core_KQI_daily_tot_20201028.csv").then(function(data) {
+//         // console.log(data[0]);
+//         lastweek = data[data.length-2]['VLR Subscriber Register'];
+//         nowweek = data[data.length-1]['VLR Subscriber Register'];
+//         percentage = nowweek/lastweek*100;
+//         increase = percentage-100;
+//         console.log(increase.toFixed(2) + "%");
+//         $('#vlrregister-persen').text(increase.toFixed(2) + " %");
+//         total = parseFloat(data[data.length-1]['VLR Subscriber Register']);
+//         $('#vlrregister-sum').text(nFormatter(total,2) + " subs")
+//         if(increase<0) {
+//             $('#vlrregister-persen').css("color", "red");
+//             $('#vlrregister-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+//         } else {
+//             $('#vlrregister-persen').css("color", "forestgreen");
+//             $('#vlrregister-icon').html(`
+//             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+//             `);
+//         }
+//         lastweek = data[data.length-2]['VLR Subscriber Attach'];
+//         nowweek = data[data.length-1]['VLR Subscriber Attach'];
+//         percentage = nowweek/lastweek*100;
+//         increase = percentage-100;
+//         $('#vlrattach-persen').text(increase.toFixed(2) + " %");
+//         total = parseFloat(data[data.length-1]['VLR Subscriber Attach']);
+//         $('#vlrattach-sum').text(nFormatter(total,2) + " subs")
+//         if(increase<0) {
+//             $('#vlrattach-persen').css("color", "red");
+//             $('#vlrattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+//         } else {
+//             $('#vlrattach-persen').css("color", "forestgreen");
+//             $('#vlrattach-icon').html(`
+//             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+//             `);
+//         }
+//         lastweek = data[data.length-2]['Voice (Erlang)'];
+//         nowweek = data[data.length-1]['Voice (Erlang)'];
+//         percentage = (nowweek/lastweek*100)-100;
+//         $('#voicetotal-persen').text(percentage.toFixed(2) + " %");
+//         total = parseFloat(data[data.length-1]['Voice (Erlang)']);
+//         $('#voicetotal-sum').text(nFormatter(total,2) + " subs")
+//         if(percentage<0) {
+//             $('#voicetotal-persen').css("color", "red");
+//             $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+//         } else {
+//             $('#voicetotal-persen').css("color", "forestgreen");
+//             $('#voicetotal-icon').html(`
+//             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+//             `);
+//         }
+//       });
+// });
   
 //line
 // var ctxL2 = document.getElementById("lineChart2").getContext('2d');
