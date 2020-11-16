@@ -6,11 +6,35 @@
     <div class="container-fluid">
         <div class="card p-4 pt-0">
             <h6 class="card-title" style="font-weight:600">Traffic Monitoring</h6>
-            <span class="text-muted">October</span>
+            <span class="text-muted">November</span>
             <div class="row">
-
-                <div class="col-md-6 col-lg-4">
-                    <span class="mb-2">Voice Traffic (Erlang)</span>
+                <div class="col-md-6 col-lg-3">
+                    <span class="mb-2">Data Traffic</span>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class='custom1'>
+                                <div class="row">
+                                    <div class="col pr-0">
+                                        <strong class="db">Voice</strong>
+                                        <small class="db text-muted">4,78 MErl</small>
+                                    </div>
+                                    <div class="col pl-0">
+                                        <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="db persen" style="color:orange">0.28
+                                            %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="lineChart4" height="180"></canvas>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <span class="mb-2">Voice Traffic</span>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class='custom1'>
@@ -18,11 +42,11 @@
                                     <div class="col pr-0">
                                         <strong class="db">Traffic Total</strong>
                                         <small id="voicetotal-sum" class="db text-muted">53.518
-                                            Subs</small>
+                                            Erlang</small>
                                     </div>
                                     <div class="col pl-0">
                                         <div id="voicetotal-icon">
-
+                                            <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -57,25 +81,53 @@
                     </div>
                     <canvas id="lineChart" height="180"></canvas>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <span class="mb-2">VLR Subscriber</span>
+                <div class="col-md-6 col-lg-3">
+                    <span class="mb-2">Network Availability</span>
                     <div class="row mb-3">
                         <div class="col-6">
-                            <div class='custom1'>
+                        <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Register</strong>
-                                        <small id="vlrregister-sum" class="db text-muted">53.518
-                                            Subs</small>
+                                        <strong class="db">Today Availability</strong>
+                                        <small id="netavail-sum" class="db text-muted">53.518
+                                            Erlang</small>
                                     </div>
                                     <div class="col pl-0">
-                                        <div id="vlrregister-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+                                        <div id="netavail-icon">
+                                            <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <span id="vlrregister-persen" class="db persen vlrsubs">0.28
+                                        <span id="netavail-persen" class="db persen voiceerlang">0.28
+                                            %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="lineChart5" height="180"></canvas>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <span class="mb-2">National Subscriber</span>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class='custom1'>
+                                <div class="row">
+                                    <div class="col pr-0">
+                                        <strong class="db">Active</strong>
+                                        <small id="nsactive-sum" class="db text-muted">53.518
+                                            Subs</small>
+                                    </div>
+                                    <div class="col pl-0">
+                                        <div id="nsactive-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span id="nsactive-persen" class="db persen vlrsubs">0.28
                                             %</span>
                                     </div>
                                 </div>
@@ -86,49 +138,26 @@
                                 <div class="row">
                                     <div class="col pr-0">
                                         <strong class="db">Attach</strong>
-                                        <small id="vlrattach-sum" class="db text-muted">-43.518
+                                        <small id="nsattach-sum" class="db text-muted">-43.518
                                             Subs</small>
 
                                     </div>
                                     <div class="col pl-0">
-                                        <div id="vlrattach-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+                                        <div id="nsattach-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <span id="vlrattach-persen" class="db persen vlrattach" style="color:forestgreen">-0.18 %</span>
+                                        <span id="nsattach-persen" class="db persen vlrattach" style="color:forestgreen">-0.18 %</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <canvas id="lineChart2" height="180"></canvas>
-                </div>
-                <div class="col-md-12 col-lg-4">
-                    <span class="mb-2">National Voice</span>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <div class='custom1'>
-                                <div class="row">
-                                    <div class="col pr-0">
-                                        <strong class="db">Voice</strong>
-                                        <small class="db text-muted">4,78 MErl</small>
-                                    </div>
-                                    <div class="col pl-0">
-                                        <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="db persen" style="color:orange">0.28
-                                            %</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <canvas id="lineChart3" height="180"></canvas>
+                    <!--  -->
+
                 </div>
             </div>
         </div>
@@ -665,6 +694,172 @@
 
 <?php $this->view('template/_jsresource'); ?>
 <!-- Own Javascript Here -->
+<script>
+    // Formatter
+    function nFormatter(num, digits) {
+        var si = [{
+                value: 1,
+                symbol: ""
+            },
+            {
+                value: 1E3,
+                symbol: "k"
+            },
+            {
+                value: 1E6,
+                symbol: "M"
+            },
+            {
+                value: 1E9,
+                symbol: "G"
+            },
+            {
+                value: 1E12,
+                symbol: "T"
+            },
+            {
+                value: 1E15,
+                symbol: "P"
+            },
+            {
+                value: 1E18,
+                symbol: "E"
+            }
+        ];
+        var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+        var i;
+        for (i = si.length - 1; i > 0; i--) {
+            if (num >= si[i].value) {
+                break;
+            }
+        }
+        return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
+    }
+</script>
+<script>
+// Json Decode
+var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
+    var datanatsubscriber = JSON.parse(' <?= $natsubscriber; ?>');
+    var datavoicetraffic = JSON.parse('<?= $voicetraffic; ?>');
+
+    // Voice Traffic
+    var voice = {
+        'tanggal': [],
+        'total': [],
+        'jabotabek': [],
+        'cwj': [],
+        'ejbn': [],
+        'sumatera': [],
+        'kalisumapa': []
+    }
+    datavoicetraffic.forEach(function(value, index) {
+        tanggal = value.tanggal.substring(3, 5)
+        voice.tanggal.push(tanggal);
+        voice.total.push(value.total);
+        voice.jabotabek.push(value.jabotabek);
+        voice.cwj.push(value.cwj);
+        voice.ejbn.push(value.ejbn);
+        voice.sumatera.push(value.sumatera);
+        voice.kalisumapa.push(value.kalisumapa);
+    })
+
+    // National Subscriber
+    var natsubscriber = {
+        'tanggal': [],
+        'active': [],
+        'attach': []
+    }
+    datanatsubscriber.forEach(function(value, index) {
+        tanggal = value.tanggal.substring(3, 5)
+        natsubscriber.tanggal.push(tanggal);
+        natsubscriber.active.push(value.active);
+        natsubscriber.attach.push(value.attach);
+    })
+
+    // Network Availability
+    var networkavailability = {
+        'tanggal': [],
+        'fourg': [],
+        'threeg': []
+    }
+    datanetavailability.forEach(function(value, index) {
+        tanggal = value.tanggal.substring(3, 5)
+        networkavailability.tanggal.push(tanggal);
+        percent = parseFloat(value.fourg);
+        networkavailability.fourg.push(percent);
+        percent = parseFloat(value.threeg);
+        networkavailability.threeg.push(percent);
+    })
+
+    // Total Widget
+    // Voice Traffic
+    nv_nowweek = datavoicetraffic[datavoicetraffic.length - 1].total;
+    nv_lastweek = datavoicetraffic[datavoicetraffic.length - 2].total;
+    nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
+    $('#voicetotal-persen').text(nv_delta.toFixed(2) + " %");
+    total = parseFloat(datavoicetraffic[datavoicetraffic.length - 1].total);
+    $('#voicetotal-sum').text(nFormatter(total, 2) + " erlang")
+    if (nv_delta < 0) {
+        $('#voicetotal-persen').css("color", "red");
+        $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else {
+        $('#voicetotal-persen').css("color", "forestgreen");
+        $('#voicetotal-icon').html(`
+            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+            `);
+    }
+    
+    // National Subscriber
+    // Active
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].active;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].active;
+    nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
+    $('#nsactive-persen').text(nv_delta.toFixed(2) + " %");
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].active);
+    $('#nsactive-sum').text(nFormatter(total, 2) + " Subs")
+    if (nv_delta < 0) {
+        $('#nsactive-persen').css("color", "red");
+        $('#nsactive-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else {
+        $('#nsactive-persen').css("color", "forestgreen");
+        $('#nsactive-icon').html(`
+            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+            `);
+    }
+    // Attach
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].attach;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].attach;
+    nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
+    $('#nsattach-persen').text(nv_delta.toFixed(2) + " %");
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].attach);
+    $('#nsattach-sum').text(nFormatter(total, 2) + " Subs")
+    if (nv_delta < 0) {
+        $('#nsattach-persen').css("color", "red");
+        $('#nsattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else {
+        $('#nsattach-persen').css("color", "forestgreen");
+        $('#nsattach-icon').html(`
+            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+            `);
+    }
+    
+    // Network Availability
+    nv_nowweek = parseFloat(datanetavailability[datanetavailability.length - 1].fourg);
+    nv_lastweek = parseFloat(datanetavailability[datanetavailability.length - 2].fourg);
+    nv_delta = nv_nowweek - nv_lastweek;
+    $('#netavail-persen').text(nv_delta.toFixed(2) + " %");
+    total = parseFloat(datanetavailability[datanetavailability.length - 1].fourg);
+    $('#netavail-sum').text(nFormatter(total, 2) + " %");
+    if (nv_delta < 0) {
+        $('#netavail-persen').css("color", "red");
+        $('#netavail-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else {
+        $('#netavail-persen').css("color", "forestgreen");
+        $('#netavail-icon').html(`
+            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+            `);
+    }
+</script>
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.chart.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.table.js"></script>
 <script>

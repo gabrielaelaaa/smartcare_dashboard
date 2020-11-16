@@ -22,10 +22,10 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('logged_in') != TRUE) {
+		$this->load->model('M_dashboard');
+		if($this->session->userdata('logged_in')!=TRUE) {
 			redirect(base_url('login'), 'refresh');
 		}
-		$this->load->model('M_dashboard');
 	}
 	public function index()
 	{
@@ -34,13 +34,17 @@ class Dashboard extends CI_Controller
 		// );
 		// $this->load->view('dashboard', $data);
 		$data = [
-			// 'search_csv_flag' => $this->db->query($sql, [$this->session->userdata('username')])->num_rows(),
-			'username' => $this->session->userdata('username'),
-			'role' => $this->session->userdata('role'),
-			'konten' => 'dashboard',
-			'title' => 'Dashboard',
-		];
-		$this->load->view('template/layout', $data);
+
+            'username' => $this->session->userdata('username'),
+            'role' => $this->session->userdata('role'),
+            'konten' => 'dashboard',
+            'title' => 'Dashboard',
+            'natsubscriber'=> json_encode($this->M_dashboard->national_subscribers(11)->result()),
+            'voicetraffic'=> json_encode($this->M_dashboard->voice_traffic_erlang(11)->result()),
+            'networkavailability'=> json_encode($this->M_dashboard->network_availability(11)->result())
+        ];
+        $this->load->view('template/layout', $data);
+
 	}
 	public function network_availability()
 	{

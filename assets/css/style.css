@@ -197,6 +197,7 @@ span.judul {
 }
 
 .custom1 {
+    min-height:100px;
     width: 100%;
     max-width: 160px;
     background: white;
