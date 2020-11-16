@@ -1,4 +1,3 @@
-
 <!-- Content Here -->
 <!-- <span class='judul'>Dashboard Home</span> -->
 <!-- <div class='contentwrap pt-2'> -->
@@ -261,42 +260,235 @@
             </div>
             <div class="col-4">
                 <div class="card p-4 mt-3 heightfull">
-                    <h6 class="card-title" style="font-weight:600">OTT App</h6>
+                    <h6 class="card-title" style="font-weight:600">Top 10 App</h6>
                     <div class="row">
 
                         <div class="col">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">All</a>
+                                    <a class="nav-link" id=" payload" data-toggle="tab" href="#payload" role="tab" aria-controls="payload" aria-selected="true">Payload</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="2g-tab" data-toggle="tab" href="#twog" role="tab" aria-controls="twog" aria-selected="false">2G</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="3g-tab" data-toggle="tab" href="#threeg" role="tab" aria-controls="threeg" aria-selected="false">3G</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="4g-tab" data-toggle="tab" href="#fourg" role="tab" aria-controls="fourg" aria-selected="false">4G</a>
-                                </li>
                             </ul>
                             <div class="tab-content p-0" id="myTabContent">
-                                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                                <div class="tab-pane fade show active" id="payload" role="tabpanel" aria-labelledby="payload">
                                     <ul class="list-group">
 
-                                        <a href="#" class="list-group-item list-group-item-action">
+                                        <a class="list-group-item list-group-item-action">
                                             <div>
                                                 <div class="row">
                                                     <div class="col-3">
                                                         <div class="image-parent text-center">
-                                                            <i class="fab fa-youtube fa-fw"></i>
+                                                            <span id="geticon1" name="geticon1"></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-9">
                                                         <div class="row align-items-center">
                                                             <div class="col-7 ottapp-left-info">
-                                                                Youtube
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
+                                                                <span id="appname1" name="appname1"></span>
+                                                                <p><small> <span id="payloadvalue1" name="payloadvalue1"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon2" name="geticon2"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname2" name="appname2"></span>
+                                                                <p><small> <span id="payloadvalue2" name="payloadvalue2"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon3" name="geticon3"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname3" name="appname3"></span>
+                                                                <p><small> <span id="payloadvalue3" name="payloadvalue3"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon4" name="geticon4"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname4" name="appname4"></span>
+                                                                <p><small> <span id="payloadvalue4" name="payloadvalue4"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon5" name="geticon5"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname5" name="appname5"></span>
+                                                                <p><small> <span id="payloadvalue5" name="payloadvalue5"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon6" name="geticon6"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname6" name="appname6"></span>
+                                                                <p><small> <span id="payloadvalue6" name="payloadvalue6"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon7" name="geticon7"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname7" name="appname7"></span>
+                                                                <p><small> <span id="payloadvalue7" name="payloadvalue7"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon8" name="geticon8"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname8" name="appname8"></span>
+                                                                <p><small> <span id="payloadvalue8" name="payloadvalue8"></span> GB</small>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-5 ottapp-right-info">
+                                                                <span>2,5%</span>
+                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="list-group-item list-group-item-action">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="image-parent text-center">
+                                                            <span id="geticon9" name="geticon9"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-7 ottapp-left-info">
+                                                                <span id="appname9" name="appname9"></span>
+                                                                <p><small> <span id="payloadvalue9" name="payloadvalue9"></span> GB</small>
                                                                 </p>
                                                             </div>
                                                             <div class="col-5 ottapp-right-info">
@@ -310,236 +502,24 @@
                                             </div>
                                         </a>
 
-                                        <a href="#" class="list-group-item list-group-item-action">
+                                        <a class="list-group-item list-group-item-action">
                                             <div>
                                                 <div class="row">
                                                     <div class="col-3">
                                                         <div class="image-parent text-center">
-                                                            <i class="fab fa-line fa-fw"></i>
+                                                            <span id="geticon10" name="geticon10"></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-9">
                                                         <div class="row align-items-center">
                                                             <div class="col-7 ottapp-left-info">
-                                                                Line
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
+                                                                <span id="appname10" name="appname10"></span>
+                                                                <p><small> <span id="payloadvalue10" name="payloadvalue10"></span> GB</small>
                                                                 </p>
                                                             </div>
                                                             <div class="col-5 ottapp-right-info">
                                                                 <span>2,5%</span>
                                                                 <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-twitter fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Twitter
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span>3,3%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-whatsapp fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Whatsapp
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span>9,3%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-youtube fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Youtube
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span style="color:red">-1,1%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw" style="color:red"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-youtube fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Youtube
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span style="color:red">-1,1%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw" style="color:red"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-youtube fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Youtube
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span style="color:red">-1,1%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw" style="color:red"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-youtube fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Youtube
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span style="color:red">-1,1%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw" style="color:red"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-youtube fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Youtube
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span style="color:red">-1,1%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw" style="color:red"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <div class="image-parent text-center">
-                                                            <i class="fab fa-youtube fa-fw"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-7 ottapp-left-info">
-                                                                Youtube
-                                                                <p><small>83,667 GB / 85,796
-                                                                        GB</small>
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-5 ottapp-right-info">
-                                                                <span style="color:red">-1,1%</span>
-                                                                <div class="float-right"><i class="fas fa-angle-up fa-fw" style="color:red"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -884,64 +864,64 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.table.js"></script>
 <script>
     d3
-  .csv("<?= base_url();?>Core_KQI_daily_tot_20201028.csv")
-  .then(voiceerlang);
-  d3
-  .csv("<?= base_url();?>Core_KQI_daily_tot_20201028.csv")
-  .then(vlrsubscriber);
-  $(document).ready(function(){
-    d3.csv("<?= base_url();?>Core_KQI_daily_tot_20201028.csv").then(function(data) {
-        // console.log(data[0]);
-        lastweek = data[data.length-2]['VLR Subscriber Register'];
-        nowweek = data[data.length-1]['VLR Subscriber Register'];
-        percentage = nowweek/lastweek*100;
-        increase = percentage-100;
-        console.log(increase.toFixed(2) + "%");
-        $('#vlrregister-persen').text(increase.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['VLR Subscriber Register']);
-        $('#vlrregister-sum').text(nFormatter(total,2) + " subs")
-        if(increase<0) {
-            $('#vlrregister-persen').css("color", "red");
-            $('#vlrregister-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#vlrregister-persen').css("color", "forestgreen");
-            $('#vlrregister-icon').html(`
+        .csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv")
+        .then(voiceerlang);
+    d3
+        .csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv")
+        .then(vlrsubscriber);
+    $(document).ready(function() {
+        d3.csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv").then(function(data) {
+            // console.log(data[0]);
+            lastweek = data[data.length - 2]['VLR Subscriber Register'];
+            nowweek = data[data.length - 1]['VLR Subscriber Register'];
+            percentage = nowweek / lastweek * 100;
+            increase = percentage - 100;
+            console.log(increase.toFixed(2) + "%");
+            $('#vlrregister-persen').text(increase.toFixed(2) + " %");
+            total = parseFloat(data[data.length - 1]['VLR Subscriber Register']);
+            $('#vlrregister-sum').text(nFormatter(total, 2) + " subs")
+            if (increase < 0) {
+                $('#vlrregister-persen').css("color", "red");
+                $('#vlrregister-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+            } else {
+                $('#vlrregister-persen').css("color", "forestgreen");
+                $('#vlrregister-icon').html(`
             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
             `);
-        }
-        lastweek = data[data.length-2]['VLR Subscriber Attach'];
-        nowweek = data[data.length-1]['VLR Subscriber Attach'];
-        percentage = nowweek/lastweek*100;
-        increase = percentage-100;
-        $('#vlrattach-persen').text(increase.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['VLR Subscriber Attach']);
-        $('#vlrattach-sum').text(nFormatter(total,2) + " subs")
-        if(increase<0) {
-            $('#vlrattach-persen').css("color", "red");
-            $('#vlrattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#vlrattach-persen').css("color", "forestgreen");
-            $('#vlrattach-icon').html(`
+            }
+            lastweek = data[data.length - 2]['VLR Subscriber Attach'];
+            nowweek = data[data.length - 1]['VLR Subscriber Attach'];
+            percentage = nowweek / lastweek * 100;
+            increase = percentage - 100;
+            $('#vlrattach-persen').text(increase.toFixed(2) + " %");
+            total = parseFloat(data[data.length - 1]['VLR Subscriber Attach']);
+            $('#vlrattach-sum').text(nFormatter(total, 2) + " subs")
+            if (increase < 0) {
+                $('#vlrattach-persen').css("color", "red");
+                $('#vlrattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+            } else {
+                $('#vlrattach-persen').css("color", "forestgreen");
+                $('#vlrattach-icon').html(`
             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
             `);
-        }
-        lastweek = data[data.length-2]['Voice (Erlang)'];
-        nowweek = data[data.length-1]['Voice (Erlang)'];
-        percentage = (nowweek/lastweek*100)-100;
-        $('#voicetotal-persen').text(percentage.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['Voice (Erlang)']);
-        $('#voicetotal-sum').text(nFormatter(total,2) + " subs")
-        if(percentage<0) {
-            $('#voicetotal-persen').css("color", "red");
-            $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#voicetotal-persen').css("color", "forestgreen");
-            $('#voicetotal-icon').html(`
+            }
+            lastweek = data[data.length - 2]['Voice (Erlang)'];
+            nowweek = data[data.length - 1]['Voice (Erlang)'];
+            percentage = (nowweek / lastweek * 100) - 100;
+            $('#voicetotal-persen').text(percentage.toFixed(2) + " %");
+            total = parseFloat(data[data.length - 1]['Voice (Erlang)']);
+            $('#voicetotal-sum').text(nFormatter(total, 2) + " subs")
+            if (percentage < 0) {
+                $('#voicetotal-persen').css("color", "red");
+                $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+            } else {
+                $('#voicetotal-persen').css("color", "forestgreen");
+                $('#voicetotal-icon').html(`
             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
             `);
-        }
-      });
-});
+            }
+        });
+    });
     jQuery(document).ready(function() {
         jQuery('#vmap').vectorMap({
             map: 'indonesia_id',
@@ -964,6 +944,7 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
         }
     });
     $(document).ready(function() {
+        get_app_name();
         if (!$("nav").hasClass("active")) {
             $(".togname").show();
         } else {
@@ -987,4 +968,65 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
         });
 
     });
+
+    function get_app_name() {
+        var baseurl = '<?php echo base_url() ?>';
+        var date = new Date();
+        date = moment(date).add(-1, 'day').format("yyyy-MM-DD");
+        $.ajax({
+            url: baseurl + 'Dashboard/top10app',
+            method: 'post',
+            data: {
+                date: date
+            },
+            dataType: 'json',
+            success: function(response) {
+                var len = response.length;
+                var appname = [];
+                var get_icon = [];
+                var traffic = [];
+                var i;
+                if (len > 0) {
+                    // Read values
+                    for (i = 0; i < 10; i++) {
+                        // $('#app_name_1,#get_icon_1,#payload_value_1,#app_name_2,#get_icon_2,#payload_value_2').text('');
+                        appname[i] = response[i].app_name;
+                        traffic[i] = parseFloat(response[i].total_traffic_gb).toFixed(2);
+                        if (appname[i] == 'YouTube') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/youtube.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'TikTok') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/tiktok.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'GooglePlay') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/google_play.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'Facebook') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/facebook.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'WhatsApp') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/whatsapp.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'Instagram') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/instagram.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'MobileLegends') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/mobilelegend.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'Google_Common') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/google.png" width="70" height="70"/>';
+                        } else if (appname[i] == 'YouTube_Go') {
+                            get_icon[i] = '<img src="<?php echo base_url(); ?>assets/img/logo/youtube.png" width="70" height="70"/>';
+                        } else {
+                            get_icon[i] = '<i class="fas fa-globe fa-fw"></i>';
+                        }
+                        var b = i + 1
+                        $('#appname' + b).text(appname[i]);
+                        // console.log("#app_name_" + b);
+                        $('#geticon' + b).html(get_icon[i]);
+                        $('#payloadvalue' + b).text(traffic[i]);
+                    }
+                    // // var output = appname[i];
+                    // // console.log(output)
+                    // $('#app_name_1').text(appname[i]);
+                    // $('#get_icon_1').html(get_icon[i]);
+                    // $('#payload_value_1').text(traffic[i]);
+                }
+            }
+        });
+
+    }
 </script>

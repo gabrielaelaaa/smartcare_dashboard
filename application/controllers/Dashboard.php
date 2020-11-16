@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Dashboard extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -18,7 +19,8 @@ class Dashboard extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->model('M_dashboard');
 		if($this->session->userdata('logged_in')!=TRUE) {
@@ -32,16 +34,17 @@ class Dashboard extends CI_Controller {
 		// );
 		// $this->load->view('dashboard', $data);
 		$data = [
-            // 'search_csv_flag' => $this->db->query($sql, [$this->session->userdata('username')])->num_rows(),
+
             'username' => $this->session->userdata('username'),
             'role' => $this->session->userdata('role'),
             'konten' => 'dashboard',
-			'title' => 'Dashboard',
-			'natsubscriber'=> json_encode($this->M_dashboard->national_subscribers(11)->result()),
-			'voicetraffic'=> json_encode($this->M_dashboard->voice_traffic_erlang(11)->result()),
-			'networkavailability'=> json_encode($this->M_dashboard->network_availability(11)->result())
+            'title' => 'Dashboard',
+            'natsubscriber'=> json_encode($this->M_dashboard->national_subscribers(11)->result()),
+            'voicetraffic'=> json_encode($this->M_dashboard->voice_traffic_erlang(11)->result()),
+            'networkavailability'=> json_encode($this->M_dashboard->network_availability(11)->result())
         ];
         $this->load->view('template/layout', $data);
+
 	}
 	public function network_availability()
 	{
@@ -50,23 +53,30 @@ class Dashboard extends CI_Controller {
 		// );
 		// $this->load->view('dashboard', $data);
 		$data = [
-            // 'search_csv_flag' => $this->db->query($sql, [$this->session->userdata('username')])->num_rows(),
-            'username' => $this->session->userdata('username'),
-            'role' => $this->session->userdata('role'),
-            'konten' => 'network_availability',
-            'title' => 'Network Availability',
-        ];
-        $this->load->view('template/layout', $data);
+			// 'search_csv_flag' => $this->db->query($sql, [$this->session->userdata('username')])->num_rows(),
+			'username' => $this->session->userdata('username'),
+			'role' => $this->session->userdata('role'),
+			'konten' => 'network_availability',
+			'title' => 'Network Availability',
+		];
+		$this->load->view('template/layout', $data);
 	}
 	public function traffic_monitoring()
 	{
 		$data = [
-            // 'search_csv_flag' => $this->db->query($sql, [$this->session->userdata('username')])->num_rows(),
-            'username' => $this->session->userdata('username'),
-            'role' => $this->session->userdata('role'),
-            'konten' => 'traffic_monitoring',
-            'title' => 'Traffic Monitoring',
-        ];
-        $this->load->view('template/layout', $data);
+			// 'search_csv_flag' => $this->db->query($sql, [$this->session->userdata('username')])->num_rows(),
+			'username' => $this->session->userdata('username'),
+			'role' => $this->session->userdata('role'),
+			'konten' => 'traffic_monitoring',
+			'title' => 'Traffic Monitoring',
+		];
+		$this->load->view('template/layout', $data);
+	}
+	public function top10app()
+	{
+		$date = $this->input->post('date');
+		// echo $date;
+		$data = $this->M_dashboard->get_top10app($date);
+		echo json_encode($data);
 	}
 }

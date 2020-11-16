@@ -37,5 +37,13 @@ class M_dashboard extends CI_Model {
         $this->db->where("EXTRACT(MONTH FROM TO_TIMESTAMP(day, 'MM/DD/YYY HH24:MI'))=".$month);
         $q = $this->db->get();
         return $q;
+
+    public function get_top10app($date)
+    {
+
+        $sql = 'SELECT * FROM top10app_traffic where daily=? order by rank_no asc';
+        $response = $this->db->query($sql, $date)->result_array();
+        return $response;
+
     }
 }

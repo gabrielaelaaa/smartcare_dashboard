@@ -1,10 +1,13 @@
-.bg-yellow-indosat{
+.bg-yellow-indosat {
     background-color: #FBC02D !important;
 }
-.bg-red-indosat{
+
+.bg-red-indosat {
     color: #D32F2F !important;
 }
-a.bg-red-indosat:hover, a.bg-red-indosat:focus {
+
+a.bg-red-indosat:hover,
+a.bg-red-indosat:focus {
     color: #ffffff !important;
 }
 
@@ -14,12 +17,12 @@ a.bg-red-indosat:hover, a.bg-red-indosat:focus {
 /*    background-color: #117a8b !important;*/
 /*}*/
 
-.bg-yellow-indosat>.sidebar>a{
+.bg-yellow-indosat>.sidebar>a {
     color: #D32F2F !important;
 }
 
-.dropdown-item.test:hover, .dropdown-item.test:focus {
+.dropdown-item.test:hover,
+.dropdown-item.test:focus {
     color: #ffffff !important;
     background-color: #D32F2F !important;
 }
-
