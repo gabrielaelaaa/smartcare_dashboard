@@ -20,6 +20,7 @@ class Dashboard extends CI_Controller {
 	 */
 	public function __construct() {
 		parent::__construct();
+		$this->load->model('M_dashboard');
 		if($this->session->userdata('logged_in')!=TRUE) {
 			redirect(base_url('login'), 'refresh');
 		}
@@ -35,7 +36,10 @@ class Dashboard extends CI_Controller {
             'username' => $this->session->userdata('username'),
             'role' => $this->session->userdata('role'),
             'konten' => 'dashboard',
-            'title' => 'Dashboard',
+			'title' => 'Dashboard',
+			'natsubscriber'=> json_encode($this->M_dashboard->national_subscribers(11)->result()),
+			'voicetraffic'=> json_encode($this->M_dashboard->voice_traffic_erlang(11)->result()),
+			'networkavailability'=> json_encode($this->M_dashboard->network_availability(11)->result())
         ];
         $this->load->view('template/layout', $data);
 	}
