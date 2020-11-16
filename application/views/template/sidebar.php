@@ -10,7 +10,7 @@
         <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
         <!-- <li class="nav-header">MULTI LEVEL EXAMPLE</li> -->
-        <li class="nav-item brand-link">
+        <li class="nav-item brand-link" style="padding-bottom: 0px;">
             <a href="#" class="nav-link bg-red-indosat">
                 <i class="fas fa-bars nav-icon"></i>
                 <p class="brand-text font-weight-light  font-weight-bold">
@@ -34,15 +34,61 @@
                  with font-awesome or any other icon font library -->
                 <!-- <li class="nav-header">MULTI LEVEL EXAMPLE</li> -->
                 <li class="nav-item">
-                    <a href="<?= base_url('Dashboard') ?>" class="nav-link bg-red-indosat">
+                    <a href="<?= base_url() ?>" class="nav-link bg-red-indosat">
                         <i class="fab fa-slack nav-icon"></i>
                         <p>
-                            Dashboard
+                            Daily Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('CeiController') ?>" class="nav-link bg-red-indosat">
+                        <i class="fas fa-poll nav-icon"></i>
+                        <p>
+                            CEI Analysis
                         </p>
                     </a>
                 </li>
 
+                <!-- 
                 <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link bg-red-indosat">
+                        <i class="fas fa-poll nav-icon"></i>
+                        <p>
+                            Report
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('CeiController') ?>" class="nav-link bg-red-indosat">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>CEI Analysis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('Ip_block/index_oam') ?>" class="nav-link bg-red-indosat">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>IP Block</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('Ip_manager/index_oam') ?>" class="nav-link bg-red-indosat">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>IP Manager</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('Dashboard/index_oam') ?>" class="nav-link bg-red-indosat">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>IP Statistics</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li> -->
+
+                <!-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link bg-red-indosat">
                         <i class="fas fas fa-rss nav-icon"></i>
                         <p>
@@ -77,49 +123,9 @@
                         </li>
 
                     </ul>
-                </li>
+                </li> -->
 
-
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link bg-red-indosat">
-                        <i class="fas fa-poll nav-icon"></i>
-                        <p>
-                            OAM
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('Hostname_manager/index_oam') ?>" class="nav-link bg-red-indosat">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Hostname Manager</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('Ip_block/index_oam') ?>" class="nav-link bg-red-indosat">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>IP Block</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('Ip_manager/index_oam') ?>" class="nav-link bg-red-indosat">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>IP Manager</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('Dashboard/index_oam') ?>" class="nav-link bg-red-indosat">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>IP Statistics</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <!-- <li class="nav-header">MULTI LEVEL EXAMPLE</li> -->
-
-                <!-- <li class="nav-header">MULTI LEVEL EXAMPLE</li> -->
-                <li class="nav-item has-treeview">
+                <!-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link bg-red-indosat">
                         <i class="fas fa-podcast nav-icon"></i>
                         <p>
@@ -135,18 +141,9 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link bg-red-indosat">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>IP PtP</p>
-                            </a>
-                        </li>
-                    </ul> -->
-                </li>
+                </li> -->
 
-
-                <li class="nav-item has-treeview">
+                <!-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link bg-red-indosat">
                         <i class="fas fa-search nav-icon"></i>
                         <p>
@@ -154,7 +151,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <?php if ($role == 'Admin') : ?>
                     <li class="nav-item has-treeview">
                         <a href="<?= base_url('Admin/user_administrator') ?>" class="nav-link bg-red-indosat">

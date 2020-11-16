@@ -38,7 +38,7 @@ body,
       top: $main-header-height;
     }
 
-    .main-header.text-sm ~ .control-sidebar {
+    .main-header.text-sm~.control-sidebar {
       top: $main-header-height-sm;
     }
 
@@ -46,7 +46,7 @@ body,
       margin-top: $main-header-height;
     }
 
-    .brand-link.text-sm ~ .sidebar {
+    .brand-link.text-sm~.sidebar {
       margin-top: $main-header-height-sm;
     }
   }
@@ -82,7 +82,7 @@ body,
     .main-sidebar {
       margin-top: calc(#{$main-header-height} / -1);
 
-      .sidebar {
+      .sidebar {
         margin-top: $main-header-height;
       }
     }
@@ -92,7 +92,7 @@ body,
     .main-sidebar {
       margin-top: calc(#{$main-header-height-sm} / -1);
 
-      .sidebar {
+      .sidebar {
         margin-top: $main-header-height-sm;
       }
     }
@@ -126,7 +126,8 @@ body,
     }
 
     // Sidebar variants brand-link fix
-    @each $name, $color in $theme-colors {
+    @each $name,
+    $color in $theme-colors {
       .sidebar-dark-#{$name} .brand-link:not([class*="navbar"]) {
         background-color: $sidebar-dark-bg;
       }
@@ -140,7 +141,7 @@ body,
       margin-top: $main-header-height;
     }
 
-    .main-header.text-sm ~ .content-wrapper {
+    .main-header.text-sm~.content-wrapper {
       margin-top: $main-header-height-sm;
     }
 
@@ -189,8 +190,8 @@ body,
           top: $main-header-height;
         }
 
-        .text-sm & .main-header ~ .control-sidebar,
-        .main-header.text-sm ~ .control-sidebar {
+        .text-sm & .main-header~.control-sidebar,
+        .main-header.text-sm~.control-sidebar {
           top: $main-header-height-sm;
         }
 
@@ -198,8 +199,8 @@ body,
           margin-top: $main-header-height;
         }
 
-        .text-sm & .brand-link ~ .sidebar,
-        .brand-link.text-sm ~ .sidebar {
+        .text-sm & .brand-link~.sidebar,
+        .brand-link.text-sm~.sidebar {
           margin-top: $main-header-height-sm;
         }
       }
@@ -255,7 +256,8 @@ body,
         }
 
         // Sidebar variants brand-link fix
-        @each $name, $color in $theme-colors {
+        @each $name,
+        $color in $theme-colors {
           .sidebar-dark-#{$name} .brand-link:not([class*="navbar"]) {
             background-color: $sidebar-dark-bg;
           }
@@ -269,8 +271,8 @@ body,
           margin-top: $main-header-height;
         }
 
-        .text-sm & .main-header ~ .content-wrapper,
-        .main-header.text-sm ~ .content-wrapper {
+        .text-sm & .main-header~.content-wrapper,
+        .main-header.text-sm~.content-wrapper {
           margin-top: $main-header-height-sm;
         }
 
@@ -293,7 +295,7 @@ body,
         .main-sidebar {
           margin-top: calc(#{$main-header-height} / -1);
 
-          .sidebar {
+          .sidebar {
             margin-top: $main-header-height;
           }
         }
@@ -303,7 +305,7 @@ body,
         .main-sidebar {
           margin-top: calc(#{$main-header-height-sm} / -1);
 
-          .sidebar {
+          .sidebar {
             margin-top: $main-header-height-sm;
           }
         }
@@ -361,6 +363,7 @@ body,
   @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
       .layout#{$infix}-footer-fixed & {
         .control-sidebar {
           bottom: 0;
@@ -392,7 +395,7 @@ body,
   .layout-top-nav & {
     margin-left: 0;
 
-    .main-header {    
+    .main-header {
       .brand-image {
         margin-top: -.5rem;
         margin-right: .2rem;
@@ -415,9 +418,11 @@ body,
 
 
 body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) {
+
   .content-wrapper,
   .main-footer,
   .main-header {
+
     &,
     &::before {
       margin-left: 0;
@@ -426,6 +431,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) {
 }
 
 body:not(.sidebar-mini-md) {
+
   .content-wrapper,
   .main-footer,
   .main-header {
@@ -440,6 +446,7 @@ body:not(.sidebar-mini-md) {
     }
 
     @include media-breakpoint-down(md) {
+
       &,
       &::before {
         margin-left: 0;
@@ -449,6 +456,7 @@ body:not(.sidebar-mini-md) {
 }
 
 .sidebar-mini-md {
+
   .content-wrapper,
   .main-footer,
   .main-header {
@@ -463,6 +471,7 @@ body:not(.sidebar-mini-md) {
     }
 
     @include media-breakpoint-down(md) {
+
       &,
       &::before {
         margin-left: $sidebar-mini-width;
@@ -474,12 +483,13 @@ body:not(.sidebar-mini-md) {
 .content-wrapper {
   background: $main-bg;
 
-  > .content {
+  >.content {
     padding: $content-padding-y $content-padding-x;
   }
 }
 
 .main-sidebar {
+
   &,
   &::before {
     $local-sidebar-transition: margin-left $transition-speed $transition-fn, width $transition-speed $transition-fn;
@@ -488,6 +498,7 @@ body:not(.sidebar-mini-md) {
   }
 
   .sidebar-collapse:not(.sidebar-mini):not(.sidebar-mini-md) & {
+
     &,
     &::before {
       box-shadow: none !important;
@@ -495,6 +506,7 @@ body:not(.sidebar-mini-md) {
   }
 
   .sidebar-collapse & {
+
     &,
     &::before {
       margin-left: -$sidebar-width;
@@ -506,6 +518,7 @@ body:not(.sidebar-mini-md) {
   }
 
   @include media-breakpoint-down(sm) {
+
     &,
     &::before {
       box-shadow: none !important;
@@ -513,6 +526,7 @@ body:not(.sidebar-mini-md) {
     }
 
     .sidebar-open & {
+
       &,
       &::before {
         margin-left: 0;
@@ -600,6 +614,7 @@ body:not(.sidebar-mini-md) {
 
 
 .hold-transition {
+
   .content-wrapper,
   .main-header,
   .main-sidebar,
