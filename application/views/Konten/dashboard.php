@@ -118,17 +118,17 @@
                                 <div class="row">
                                     <div class="col pr-0">
                                         <strong class="db">Active</strong>
-                                        <small id="vlr-sum" class="db text-muted">53.518
+                                        <small id="nsactive-sum" class="db text-muted">53.518
                                             Subs</small>
                                     </div>
                                     <div class="col pl-0">
-                                        <div id="vlr-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+                                        <div id="nsactive-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <span id="vlr-persen" class="db persen vlrsubs">0.28
+                                        <span id="nsactive-persen" class="db persen vlrsubs">0.28
                                             %</span>
                                     </div>
                                 </div>
@@ -139,18 +139,18 @@
                                 <div class="row">
                                     <div class="col pr-0">
                                         <strong class="db">Attach</strong>
-                                        <small id="sgsn-sum" class="db text-muted">-43.518
+                                        <small id="nsattach-sum" class="db text-muted">-43.518
                                             Subs</small>
 
                                     </div>
                                     <div class="col pl-0">
-                                        <div id="sgsn-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+                                        <div id="nsattach-icon"><i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <span id="sgsn-persen" class="db persen vlrattach" style="color:forestgreen">-0.18 %</span>
+                                        <span id="nsattach-persen" class="db persen vlrattach" style="color:forestgreen">-0.18 %</span>
                                     </div>
                                 </div>
                             </div>
@@ -828,7 +828,41 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
             `);
     }
-
+    
+    // National Subscriber
+    // Active
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].active;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].active;
+    nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
+    $('#nsactive-persen').text(nv_delta.toFixed(2) + " %");
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].active);
+    $('#nsactive-sum').text(nFormatter(total, 2) + " Subs")
+    if (nv_delta < 0) {
+        $('#nsactive-persen').css("color", "red");
+        $('#nsactive-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else {
+        $('#nsactive-persen').css("color", "forestgreen");
+        $('#nsactive-icon').html(`
+            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+            `);
+    }
+    // Attach
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].attach;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].attach;
+    nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
+    $('#nsattach-persen').text(nv_delta.toFixed(2) + " %");
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].attach);
+    $('#nsattach-sum').text(nFormatter(total, 2) + " Subs")
+    if (nv_delta < 0) {
+        $('#nsattach-persen').css("color", "red");
+        $('#nsattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else {
+        $('#nsattach-persen').css("color", "forestgreen");
+        $('#nsattach-icon').html(`
+            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+            `);
+    }
+    
     // Network Availability
     nv_nowweek = parseFloat(datanetavailability[datanetavailability.length - 1].fourg);
     nv_lastweek = parseFloat(datanetavailability[datanetavailability.length - 2].fourg);
