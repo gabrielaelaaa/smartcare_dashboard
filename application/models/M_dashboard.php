@@ -7,6 +7,8 @@ class M_dashboard extends CI_Model {
         $this->db->select('DISTINCT ON(day) SUBSTRING(day FROM 0 FOR 11) as tanggal', FALSE);
         $this->db->select('sgsn_attach_subscriber_2g_3g + mme_attach_subscriber_4g as attach', FALSE);
         $this->db->select('sgsn_active_subscriber_2g_3g + mme_active_subscriber_4g as active', FALSE);
+        $this->db->select('vlr_subscriber_register as vlr', FALSE);
+        $this->db->select('sgsn_attach_subscriber_2g_3g as sgsn', FALSE);
         $this->db->from('core_kqi_daily_tot');
         $this->db->where("EXTRACT(MONTH FROM TO_TIMESTAMP(day, 'MM/DD/YYYY HH24:MI'))=".$month);
         // $this->db->group_by("day");

@@ -116,7 +116,7 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Active</strong>
+                                        <strong class="db">VLR</strong>
                                         <small id="nsactive-sum" class="db text-muted">53.518
                                             Subs</small>
                                     </div>
@@ -137,7 +137,7 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Attach</strong>
+                                        <strong class="db">SGSN</strong>
                                         <small id="nsattach-sum" class="db text-muted">-43.518
                                             Subs</small>
 
@@ -767,13 +767,17 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
     var natsubscriber = {
         'tanggal': [],
         'active': [],
-        'attach': []
+        'attach': [],
+        'vlr': [],
+        'sgsn': []
     }
     datanatsubscriber.forEach(function(value, index) {
         tanggal = value.tanggal.substring(3, 5)
         natsubscriber.tanggal.push(tanggal);
         natsubscriber.active.push(value.active);
         natsubscriber.attach.push(value.attach);
+        natsubscriber.vlr.push(value.vlr);
+        natsubscriber.sgsn.push(value.sgsn);
     })
 
     // Network Availability
@@ -811,11 +815,11 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
     
     // National Subscriber
     // Active
-    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].active;
-    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].active;
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].vlr;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].vlr;
     nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
     $('#nsactive-persen').text(nv_delta.toFixed(2) + " %");
-    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].active);
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].vlr);
     $('#nsactive-sum').text(nFormatter(total, 2) + " Subs")
     if (nv_delta < 0) {
         $('#nsactive-persen').css("color", "red");
@@ -827,11 +831,11 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
             `);
     }
     // Attach
-    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].attach;
-    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].attach;
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].sgsn;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].sgsn;
     nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
     $('#nsattach-persen').text(nv_delta.toFixed(2) + " %");
-    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].attach);
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].sgsn);
     $('#nsattach-sum').text(nFormatter(total, 2) + " Subs")
     if (nv_delta < 0) {
         $('#nsattach-persen').css("color", "red");
@@ -863,65 +867,6 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.chart.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.table.js"></script>
 <script>
-    d3
-        .csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv")
-        .then(voiceerlang);
-    d3
-        .csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv")
-        .then(vlrsubscriber);
-    $(document).ready(function() {
-        d3.csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv").then(function(data) {
-            // console.log(data[0]);
-            lastweek = data[data.length - 2]['VLR Subscriber Register'];
-            nowweek = data[data.length - 1]['VLR Subscriber Register'];
-            percentage = nowweek / lastweek * 100;
-            increase = percentage - 100;
-            console.log(increase.toFixed(2) + "%");
-            $('#vlrregister-persen').text(increase.toFixed(2) + " %");
-            total = parseFloat(data[data.length - 1]['VLR Subscriber Register']);
-            $('#vlrregister-sum').text(nFormatter(total, 2) + " subs")
-            if (increase < 0) {
-                $('#vlrregister-persen').css("color", "red");
-                $('#vlrregister-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-            } else {
-                $('#vlrregister-persen').css("color", "forestgreen");
-                $('#vlrregister-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-            }
-            lastweek = data[data.length - 2]['VLR Subscriber Attach'];
-            nowweek = data[data.length - 1]['VLR Subscriber Attach'];
-            percentage = nowweek / lastweek * 100;
-            increase = percentage - 100;
-            $('#vlrattach-persen').text(increase.toFixed(2) + " %");
-            total = parseFloat(data[data.length - 1]['VLR Subscriber Attach']);
-            $('#vlrattach-sum').text(nFormatter(total, 2) + " subs")
-            if (increase < 0) {
-                $('#vlrattach-persen').css("color", "red");
-                $('#vlrattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-            } else {
-                $('#vlrattach-persen').css("color", "forestgreen");
-                $('#vlrattach-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-            }
-            lastweek = data[data.length - 2]['Voice (Erlang)'];
-            nowweek = data[data.length - 1]['Voice (Erlang)'];
-            percentage = (nowweek / lastweek * 100) - 100;
-            $('#voicetotal-persen').text(percentage.toFixed(2) + " %");
-            total = parseFloat(data[data.length - 1]['Voice (Erlang)']);
-            $('#voicetotal-sum').text(nFormatter(total, 2) + " subs")
-            if (percentage < 0) {
-                $('#voicetotal-persen').css("color", "red");
-                $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-            } else {
-                $('#voicetotal-persen').css("color", "forestgreen");
-                $('#voicetotal-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-            }
-        });
-    });
     jQuery(document).ready(function() {
         jQuery('#vmap').vectorMap({
             map: 'indonesia_id',
