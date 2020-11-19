@@ -5,30 +5,108 @@ class M_cei extends CI_Model
 {
     function getChartCeiPerRegion($region)
     {
-        // $res = $this->db->query("select region, sum(promoter)as promoter, sum(passive)as passive, sum(detractor) as detractor from subscriber_cei sc
-        // where region = '" . $region . "' group by region");
-        $res = $this->db->query("select region, promoter ,  passive ,  detractor from subscriber_cei sc
-        where region = '" . $region . "' limit 4");
-        // daily between '2020-11-11' and '2020-11-15' and 
-        if ($res->num_rows() > 0) {
-            // $res_temp = [];
-            // $i = 0 ; 
-            // foreach($res->result_array() as $row){
-            //     $res[$i] = 
-            // }
-            return [
-                'status' => true,
-                'data' => $res->result_array()
-            ];
-        } else {
-            return [
-                'status' => false,
-                'msg' => "data tidak ada/kosong"
-            ];
-        }
+        $ddate = date("Y-m-d");
+        $date = new DateTime($ddate);
+        $week = (int)$date->format("W");
+
+        $week_now = date('Y-m-d');
+        $week_minus1 = date('Y-m-d', strtotime('-1 Thursday'));
+        $week_minus2 = date('Y-m-d', strtotime('-2 Thursday'));
+        $week_minus3 = date('Y-m-d', strtotime('-3 Thursday'));
+        $week_minus4 = date('Y-m-d', strtotime('-4 Thursday'));
+        $query_week_now = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+                            where daily between date '" . $week_minus1 . "' and date '" . $week_now . "' and region = '" . $region . "'";
+        $query_minus1 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+                            where daily between date '" . $week_minus2 . "' and date '" . $week_minus1 . "' and region = '" . $region . "'";
+        $query_minus2 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+                            where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 . "' and region = '" . $region . "'";
+        $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+                            where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "' and region = '" . $region . "'";
+
+
+        $res1 = $this->db->query($query_week_now);
+        $res2 = $this->db->query($query_minus1);
+        $res3 = $this->db->query($query_minus2);
+        $res4 = $this->db->query($query_minus3);
+
+        $result = [
+            [
+                'week' => $week,
+                'data' => $res1->row_array()
+            ],
+            [
+                'week' => --$week,
+                'data' => $res2->row_array()
+            ],
+            [
+                'week' => --$week,
+                'data' => $res3->row_array()
+            ],
+            [
+                'week' => --$week,
+                'data' => $res4->row_array()
+            ],
+        ];
+
+        return [
+            'status' => true,
+            'data' => $result
+        ];
     }
 
-    function getDataChartAppLevel(){
+    function getSubcriberLevelCei($region)
+    {
+        $ddate = date("Y-m-d");
+        $date = new DateTime($ddate);
+        $week = (int)$date->format("W");
+
+        $week_now = date('Y-m-d');
+        $week_minus1 = date('Y-m-d', strtotime('-1 Thursday'));
+        $week_minus2 = date('Y-m-d', strtotime('-2 Thursday'));
+        $week_minus3 = date('Y-m-d', strtotime('-3 Thursday'));
+        $week_minus4 = date('Y-m-d', strtotime('-4 Thursday'));
+        $query_week_now = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+                            where daily between date '" . $week_minus1 . "' and date '" . $week_now . "' and region = '" . $region . "'";
+        $query_minus1 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+                            where daily between date '" . $week_minus2 . "' and date '" . $week_minus1 . "' and region = '" . $region . "'";
+        $query_minus2 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+                            where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 . "' and region = '" . $region . "'";
+        $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+                            where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "' and region = '" . $region . "'";
+
+
+        $res1 = $this->db->query($query_week_now);
+        $res2 = $this->db->query($query_minus1);
+        $res3 = $this->db->query($query_minus2);
+        $res4 = $this->db->query($query_minus3);
+
+        $result = [
+            [
+                'week' => $week,
+                'data' => $res1->row_array()
+            ],
+            [
+                'week' => --$week,
+                'data' => $res2->row_array()
+            ],
+            [
+                'week' => --$week,
+                'data' => $res3->row_array()
+            ],
+            [
+                'week' => --$week,
+                'data' => $res4->row_array()
+            ],
+        ];
+
+        return [
+            'status' => true,
+            'data' => $result
+        ];
+    }
+
+    function getDataChartAppLevel()
+    {
         $res = $this->db->limit(4)->get('site_level_subs_segment_cei');
         return $res->result_array();
     }
