@@ -23,7 +23,9 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_dashboard');
-		if ($this->session->userdata('logged_in') != TRUE) {
+
+		if($this->session->userdata('logged_in')!=TRUE) {
+
 			redirect(base_url('login'), 'refresh');
 		}
 	}

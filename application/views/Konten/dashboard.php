@@ -84,7 +84,7 @@
                     <span class="mb-2">Network Availability</span>
                     <div class="row mb-3">
                         <div class="col-6">
-                            <div class='custom1'>
+                        <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
                                         <strong class="db">Today Availability</strong>
@@ -706,7 +706,7 @@
 </div>
 
 <?php $this->view('template/_jsresource'); ?>
-<!-- Own Javascript Here -->
+
 <script>
     // Formatter
     function nFormatter(num, digits) {
