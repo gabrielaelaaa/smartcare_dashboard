@@ -1,52 +1,13 @@
-function nFormatter(num, digits) {
-    var si = [
-      { value: 1, symbol: "" },
-      { value: 1E3, symbol: "k" },
-      { value: 1E6, symbol: "M" },
-      { value: 1E9, symbol: "G" },
-      { value: 1E12, symbol: "T" },
-      { value: 1E15, symbol: "P" },
-      { value: 1E18, symbol: "E" }
-    ];
-    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-    var i;
-    for (i = si.length - 1; i > 0; i--) {
-      if (num >= si[i].value) {
-        break;
-      }
-    }
-    return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
-  }
 //line
 // var ctxL = document.getElementById("lineChart").getContext('2d');
 // ctxL.height
-function voiceerlang(players) {
-    var datez = players.map(function (d) {
-        tanggal = d.Day.split("-");
-        return tanggal[2];
-    });
-    var erlangjabotabek = players.map(function (d) {
-        return +d['Voice Traffic (Erlang) Jabotabek'];
-    });
-    var erlangcwj = players.map(function (d) {
-        return +d['Voice Traffic (Erlang) CWJ'];
-    });
-    var erlangejbn = players.map(function (d) {
-        return +d['Voice Traffic (Erlang) EJBN'];
-    });
-    var erlangsumatera = players.map(function (d) {
-        return +d['Voice Traffic (Erlang) Sumatera'];
-    });
-    var erlangkalisumapa = players.map(function (d) {
-        return +d['Voice Traffic (Erlang) Kalisumapa'];
-    });
-    var myLineChart = new Chart('lineChart', {
-        type: 'line',
-        data: {
-            labels: datez,
-            datasets: [{
+var chartVoiceTraffic = new Chart('lineChart', {
+    type: 'line',
+    data: {
+        labels: voice.tanggal,
+        datasets: [{
                 label: "Jabotabek",
-                data: erlangjabotabek,
+                data: voice.jabotabek,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(105, 0, 132, .0)',
@@ -58,7 +19,7 @@ function voiceerlang(players) {
             },
             {
                 label: "CWJ",
-                data: erlangcwj,
+                data: voice.cwj,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(0, 137, 132, .0)',
@@ -70,7 +31,7 @@ function voiceerlang(players) {
             },
             {
                 label: "EJBN",
-                data: erlangejbn,
+                data: voice.ejbn,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(0, 137, 132, .0)',
@@ -82,7 +43,7 @@ function voiceerlang(players) {
             },
             {
                 label: "Sumatera",
-                data: erlangsumatera,
+                data: voice.sumatera,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(0, 137, 132, .0)',
@@ -94,7 +55,7 @@ function voiceerlang(players) {
             },
             {
                 label: "Kalisumapa",
-                data: erlangkalisumapa,
+                data: voice.kalisumapa,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(0, 137, 132, .0)',
@@ -104,96 +65,28 @@ function voiceerlang(players) {
                 ],
                 borderWidth: 2
             }
-            ]
+        ]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            position: 'bottom',
+            labels: {
+                boxWidth: 20
+            }
         },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'bottom',
-                labels: {
-                    boxWidth: 20
-                }
-            },
-        }
-    });
-}
-d3
-  .csv("http://localhost/Core_KQI_daily_tot_20201028.csv")
-  .then(voiceerlang);
-$(document).ready(function(){
-    d3.csv("Core_KQI_daily_tot_20201028.csv").then(function(data) {
-        // console.log(data[0]);
-        lastweek = data[data.length-2]['VLR Subscriber Register'];
-        nowweek = data[data.length-1]['VLR Subscriber Register'];
-        percentage = nowweek/lastweek*100;
-        increase = percentage-100;
-        console.log(increase.toFixed(2) + "%");
-        $('#vlrregister-persen').text(increase.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['VLR Subscriber Register']);
-        $('#vlrregister-sum').text(nFormatter(total,2) + " subs")
-        if(increase<0) {
-            $('#vlrregister-persen').css("color", "red");
-            $('#vlrregister-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#vlrregister-persen').css("color", "forestgreen");
-            $('#vlrregister-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-        }
-        lastweek = data[data.length-2]['VLR Subscriber Attach'];
-        nowweek = data[data.length-1]['VLR Subscriber Attach'];
-        percentage = nowweek/lastweek*100;
-        increase = percentage-100;
-        $('#vlrattach-persen').text(increase.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['VLR Subscriber Attach']);
-        $('#vlrattach-sum').text(nFormatter(total,2) + " subs")
-        if(increase<0) {
-            $('#vlrattach-persen').css("color", "red");
-            $('#vlrattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#vlrattach-persen').css("color", "forestgreen");
-            $('#vlrattach-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-        }
-        lastweek = data[data.length-2]['Voice (Erlang)'];
-        nowweek = data[data.length-1]['Voice (Erlang)'];
-        percentage = (nowweek/lastweek*100)-100;
-        $('#voicetotal-persen').text(percentage.toFixed(2) + " %");
-        total = parseFloat(data[data.length-1]['Voice (Erlang)']);
-        $('#voicetotal-sum').text(nFormatter(total,2) + " subs")
-        if(percentage<0) {
-            $('#voicetotal-persen').css("color", "red");
-            $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-        } else {
-            $('#voicetotal-persen').css("color", "forestgreen");
-            $('#voicetotal-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-        }
-      });
+    }
 });
-  
+
 //line
 // var ctxL2 = document.getElementById("lineChart2").getContext('2d');
-function vlrsubscriber(players) {
-    var datez = players.map(function (d) {
-        tanggal = d.Day.split("-");
-        return tanggal[2];
-    });
-    var register = players.map(function (d) {
-        return +d['VLR Subscriber Register'];
-    });
-    var attach = players.map(function (d) {
-        return +d['VLR Subscriber Attach'];
-    });
-    var myLineChart2 = new Chart('lineChart2', {
-        type: 'line',
-        data: {
-            labels: datez,
-            datasets: [{
-                label: "VLR Register Subs",
-                data: register,
+var chartNationalSubscriber = new Chart('lineChart2', {
+    type: 'line',
+    data: {
+        labels: natsubscriber.tanggal,
+        datasets: [{
+                label: "Active",
+                data: natsubscriber.active,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(105, 0, 132, .0)',
@@ -204,8 +97,8 @@ function vlrsubscriber(players) {
                 borderWidth: 2
             },
             {
-                label: "VLR Attach Subs",
-                data: attach,
+                label: "Attach",
+                data: natsubscriber.attach,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(0, 137, 132, .0)',
@@ -215,32 +108,65 @@ function vlrsubscriber(players) {
                 ],
                 borderWidth: 2
             }
-            ]
+        ]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            position: 'bottom',
+            labels: {
+                boxWidth: 20
+            }
         },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'bottom',
-                labels: {
-                    boxWidth: 20
-                }
-            },
-        }
-    });
-}
-d3
-  .csv("http://localhost/Core_KQI_daily_tot_20201028.csv")
-  .then(vlrsubscriber);
+    }
+});
 
-//line
-// var ctxL3 = document.getElementById("lineChart3").getContext('2d');
-var myLineChart3 = new Chart('lineChart3', {
+
+var chartDataTraffic = new Chart('lineChart4', {
     type: 'line',
     data: {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [{
-            label: "My First dataset",
-            data: [65, 59, 80, 81, 56, 55, 40],
+                label: "My First dataset",
+                data: [65, 59, 80, 81, 56, 55, 40],
+                pointRadius: 1,
+                backgroundColor: [
+                    'rgba(105, 0, 132, .0)',
+                ],
+                borderColor: [
+                    'rgba(200, 99, 132, .7)',
+                ],
+                borderWidth: 2
+            },
+            {
+                label: "My Second dataset",
+                data: [28, 48, 40, 19, 86, 27, 90],
+                pointRadius: 1,
+                backgroundColor: [
+                    'rgba(0, 137, 132, .0)',
+                ],
+                borderColor: [
+                    'rgba(0, 10, 130, .7)',
+                ],
+                borderWidth: 2
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            display: false
+        }
+    }
+});
+
+var chartNetworkAvailability = new Chart('lineChart5', {
+    type: 'line',
+    data: {
+        labels: networkavailability.tanggal,
+        datasets: [{
+            label: "4G",
+            data: networkavailability.fourg,
             pointRadius: 1,
             backgroundColor: [
                 'rgba(105, 0, 132, .0)',
@@ -251,25 +177,42 @@ var myLineChart3 = new Chart('lineChart3', {
             borderWidth: 2
         },
         {
-            label: "My Second dataset",
-            data: [28, 48, 40, 19, 86, 27, 90],
+            label: "3G",
+            data: networkavailability.threeg,
             pointRadius: 1,
             backgroundColor: [
-                'rgba(0, 137, 132, .0)',
+                'rgba(105, 0, 132, .0)',
             ],
             borderColor: [
-                'rgba(0, 10, 130, .7)',
+                'rgba(105, 39, 232, .7)',
             ],
             borderWidth: 2
-        }
-        ]
+        }]
     },
     options: {
         responsive: true,
         legend: {
-            display: false
+            position: 'bottom',
+            display: true,
+            labels: {
+                boxWidth: 20
+            }
+        },
+        scales: {
+
+            yAxes: [{
+                ticks: {
+                    callback: function(value) {
+                        return value + "%"
+                    }
+                },
+                scaleLabel: {
+                    display: false,
+                    labelString: "Percentage"
+                }
+            }]
         }
-    }
+    },
 });
 
 //doughnut 1

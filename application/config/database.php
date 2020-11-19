@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -75,10 +75,6 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => 'localhost',
-	// 'username' => 'postgres',
-	// 'password' => 'admin123',
-	// 'database' => 'smartcare_auto',
 	'hostname' => '114.7.170.30',
 	'username' => 'postgres',
 	'password' => 'isatsoc2020',

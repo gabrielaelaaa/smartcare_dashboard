@@ -734,6 +734,12 @@
         });
 
     });
+    d3
+  .csv("<?= base_url();?>Core_KQI_daily_tot_20201028.csv")
+  .then(voiceerlang);
+  d3
+  .csv("<?= base_url();?>Core_KQI_daily_tot_20201028.csv")
+  .then(vlrsubscriber);
 </script>
 
 <?php $this->view('template/_footer'); ?>
