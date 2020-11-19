@@ -64,7 +64,6 @@
                                                     <div class="col pr-0">
                                                         <strong class="db">SGSN</strong>
                                                         <small class="db text-muted">-43.518 Subs</small>
-
                                                     </div>
                                                     <div class="col pl-0">
                                                         <i class="fas fa-chevron-circle-down float-right"
@@ -269,7 +268,19 @@
                                     <a class="nav-link" id=" payload" data-toggle="tab" href="#payload" role="tab" aria-controls="payload" aria-selected="true">Payload</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="2g-tab" data-toggle="tab" href="#twog" role="tab" aria-controls="twog" aria-selected="false">2G</a>
+                                    <a class="nav-link" id="throu-tab" data-toggle="tab" href="#throughput" role="tab" aria-controls="throughput" aria-selected="false">Throughput</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="throu-tab" data-toggle="tab" href="#local" role="tab" aria-controls="local" aria-selected="false">Local</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="throu-tab" data-toggle="tab" href="#international" role="tab" aria-controls="international" aria-selected="false">International</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="throu-tab" data-toggle="tab" href="#latency" role="tab" aria-controls="latency" aria-selected="false">Latency</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="throu-tab" data-toggle="tab" href="#pl" role="tab" aria-controls="pl" aria-selected="false">Packet Loss</a>
                                 </li>
                             </ul>
                             <div class="tab-content p-0" id="myTabContent">
@@ -530,13 +541,15 @@
 
                                     </ul>
                                 </div>
-                                <div class="tab-pane fade" id="twog" role="tabpanel" aria-labelledby="2g-tab">
-                                    2G
+                                <div class="tab-pane fade" id="throughput" role="tabpanel" aria-labelledby="throu-tab">
+                                    Throughput
                                 </div>
-                                <div class="tab-pane fade" id="threeg" role="tabpanel" aria-labelledby="3g-tab">
-                                    3G
+                                <div class="tab-pane fade" id="local" role="tabpanel" aria-labelledby="local-tab">
+                                    Local
                                 </div>
-                                <div class="tab-pane fade" id="fourg" role="tabpanel" aria-labelledby="4g-tab">4G</div>
+                                <div class="tab-pane fade" id="international" role="tabpanel" aria-labelledby="international-tab">International</div>
+                                <div class="tab-pane fade" id="latency" role="tabpanel" aria-labelledby="latency-tab">Latency</div>
+                                <div class="tab-pane fade" id="pl" role="tabpanel" aria-labelledby="pl-tab">Packet Loss</div>
                             </div>
                         </div>
                     </div>
@@ -693,7 +706,7 @@
 </div>
 
 <?php $this->view('template/_jsresource'); ?>
-<!-- Own Javascript Here -->
+
 <script>
     // Formatter
     function nFormatter(num, digits) {
@@ -737,8 +750,8 @@
     }
 </script>
 <script>
-// Json Decode
-var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
+    // Json Decode
+    var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
     var datanatsubscriber = JSON.parse(' <?= $natsubscriber; ?>');
     var datavoicetraffic = JSON.parse('<?= $voicetraffic; ?>');
 
@@ -808,7 +821,7 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
             `);
     }
-    
+
     // National Subscriber
     // Active
     nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].active;
@@ -842,7 +855,7 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
             `);
     }
-    
+
     // Network Availability
     nv_nowweek = parseFloat(datanetavailability[datanetavailability.length - 1].fourg);
     nv_lastweek = parseFloat(datanetavailability[datanetavailability.length - 2].fourg);
@@ -863,65 +876,6 @@ var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.chart.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.table.js"></script>
 <script>
-    d3
-        .csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv")
-        .then(voiceerlang);
-    d3
-        .csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv")
-        .then(vlrsubscriber);
-    $(document).ready(function() {
-        d3.csv("<?= base_url(); ?>Core_KQI_daily_tot_20201028.csv").then(function(data) {
-            // console.log(data[0]);
-            lastweek = data[data.length - 2]['VLR Subscriber Register'];
-            nowweek = data[data.length - 1]['VLR Subscriber Register'];
-            percentage = nowweek / lastweek * 100;
-            increase = percentage - 100;
-            console.log(increase.toFixed(2) + "%");
-            $('#vlrregister-persen').text(increase.toFixed(2) + " %");
-            total = parseFloat(data[data.length - 1]['VLR Subscriber Register']);
-            $('#vlrregister-sum').text(nFormatter(total, 2) + " subs")
-            if (increase < 0) {
-                $('#vlrregister-persen').css("color", "red");
-                $('#vlrregister-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-            } else {
-                $('#vlrregister-persen').css("color", "forestgreen");
-                $('#vlrregister-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-            }
-            lastweek = data[data.length - 2]['VLR Subscriber Attach'];
-            nowweek = data[data.length - 1]['VLR Subscriber Attach'];
-            percentage = nowweek / lastweek * 100;
-            increase = percentage - 100;
-            $('#vlrattach-persen').text(increase.toFixed(2) + " %");
-            total = parseFloat(data[data.length - 1]['VLR Subscriber Attach']);
-            $('#vlrattach-sum').text(nFormatter(total, 2) + " subs")
-            if (increase < 0) {
-                $('#vlrattach-persen').css("color", "red");
-                $('#vlrattach-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-            } else {
-                $('#vlrattach-persen').css("color", "forestgreen");
-                $('#vlrattach-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-            }
-            lastweek = data[data.length - 2]['Voice (Erlang)'];
-            nowweek = data[data.length - 1]['Voice (Erlang)'];
-            percentage = (nowweek / lastweek * 100) - 100;
-            $('#voicetotal-persen').text(percentage.toFixed(2) + " %");
-            total = parseFloat(data[data.length - 1]['Voice (Erlang)']);
-            $('#voicetotal-sum').text(nFormatter(total, 2) + " subs")
-            if (percentage < 0) {
-                $('#voicetotal-persen').css("color", "red");
-                $('#voicetotal-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
-            } else {
-                $('#voicetotal-persen').css("color", "forestgreen");
-                $('#voicetotal-icon').html(`
-            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
-            `);
-            }
-        });
-    });
     jQuery(document).ready(function() {
         jQuery('#vmap').vectorMap({
             map: 'indonesia_id',
