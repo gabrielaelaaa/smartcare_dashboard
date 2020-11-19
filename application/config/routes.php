@@ -50,11 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'dashboard';
-$route['cei'] = 'CeiController';
-$route['getTime'] = 'CeiController/getTime';
-// $route['404_override'] = '';
-// $route['translate_uri_dashes'] = TRUE;
-// $route['login'] = 'login';
-// $route['logout'] = 'logout';
-// $route['(:any)'] = 'dashboard/$1';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = TRUE;
+$route['login'] = 'login';
+$route['logout'] = 'logout';
+$route['(:any)'] = 'dashboard/$1';
 
