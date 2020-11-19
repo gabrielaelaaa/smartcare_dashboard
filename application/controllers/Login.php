@@ -5,9 +5,9 @@ class Login extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if($this->session->userdata('logged_in')==TRUE) {
-			redirect(base_url(), 'refresh');
-		}
+        // if($this->session->userdata('logged_in')==TRUE) {
+		// 	redirect(base_url(), 'refresh');
+		// }
         $this->load->model('M_login');
     }
     public function cek() {
@@ -34,9 +34,9 @@ class Login extends CI_Controller {
     }
 	public function index()
 	{
-        if($this->session->userdata('logged_in')==TRUE) {
-			redirect(base_url(), 'refresh');
-        }
+    //     if($this->session->userdata('logged_in')==TRUE) {
+	// 		redirect(base_url(), 'refresh');
+    //     }
         $data['title'] = "Login";
 		$this->load->view('login', $data);
 	}

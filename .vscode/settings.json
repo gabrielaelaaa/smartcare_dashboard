@@ -1,0 +1,32 @@
+{
+  "php.executablePath": "C:\\xampp\\php\\php.exe",
+  "php.validate.executablePath": "C:\\xampp\\php\\php.exe",
+  // "phpfmt.php_bin": "C:\\xampp\\php\\php.exe",
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "beautify.language": {
+    "js": {
+      "type": [
+        "javascript",
+        "json"
+      ],
+      "filename": [
+        ".jshintrc",
+        ".jsbeautifyrc"
+      ]
+      // "ext": ["js", "json"]
+      // ^^ to set extensions to be beautified using the javascript beautifier
+    },
+    "css": [
+      "css",
+      "scss"
+    ],
+    "html": [
+      "htm",
+      "html"
+    ]
+    // ^^ providing just an array sets the VS Code file type
+  }
+}
