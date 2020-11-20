@@ -115,7 +115,7 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Active</strong>
+                                        <strong class="db">VLR</strong>
                                         <small id="nsactive-sum" class="db text-muted">53.518
                                             Subs</small>
                                     </div>
@@ -136,7 +136,7 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Attach</strong>
+                                        <strong class="db">SGSN</strong>
                                         <small id="nsattach-sum" class="db text-muted">-43.518
                                             Subs</small>
 
@@ -780,13 +780,17 @@
     var natsubscriber = {
         'tanggal': [],
         'active': [],
-        'attach': []
+        'attach': [],
+        'vlr': [],
+        'sgsn': []
     }
     datanatsubscriber.forEach(function(value, index) {
         tanggal = value.tanggal.substring(3, 5)
         natsubscriber.tanggal.push(tanggal);
         natsubscriber.active.push(value.active);
         natsubscriber.attach.push(value.attach);
+        natsubscriber.vlr.push(value.vlr);
+        natsubscriber.sgsn.push(value.sgsn);
     })
 
     // Network Availability
@@ -824,11 +828,11 @@
 
     // National Subscriber
     // Active
-    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].active;
-    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].active;
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].vlr;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].vlr;
     nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
     $('#nsactive-persen').text(nv_delta.toFixed(2) + " %");
-    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].active);
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].vlr);
     $('#nsactive-sum').text(nFormatter(total, 2) + " Subs")
     if (nv_delta < 0) {
         $('#nsactive-persen').css("color", "red");
@@ -840,11 +844,11 @@
             `);
     }
     // Attach
-    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].attach;
-    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].attach;
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].sgsn;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].sgsn;
     nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
     $('#nsattach-persen').text(nv_delta.toFixed(2) + " %");
-    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].attach);
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].sgsn);
     $('#nsattach-sum').text(nFormatter(total, 2) + " Subs")
     if (nv_delta < 0) {
         $('#nsattach-persen').css("color", "red");
