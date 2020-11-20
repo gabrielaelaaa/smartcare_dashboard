@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('CeiController') ?>" class="nav-link bg-red-indosat">
+                    <a href="<?= base_url('CeiController/index') ?>" class="nav-link bg-red-indosat">
                         <i class="fas fa-poll nav-icon"></i>
                         <p>
                             CEI Analysis
