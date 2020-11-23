@@ -8,7 +8,7 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col">
-                        <div id="vmap" style="width: 110%; height: 350px;">
+                        <div id="vmap" style="width: 100%; height: 350px;">
                         </div>
                     </div>
                 </div>
@@ -65,77 +65,8 @@
 </div>
 </div>
 
-<?php $this->view('template/_jsresource'); ?>
-<!-- Own Javascript Here -->
-<!-- <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.chart.js"></script> -->
-<!-- <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.table.js"></script> -->
 
-<script src="<?= base_url(); ?>assets/metronic/plugins/global/plugins.bundle.js"></script>
-<!-- <script src="<?= base_url(); ?>assets/metronic/plugins/custom/prismjs/prismjs.bundle.js"></script> -->
-<!-- <script src="<?= base_url(); ?>assets/metronic/js/scripts.bundle.js"></script> -->
-<script type="text/javascript" src="<?= base_url(); ?>assets/dist/jquery.vmap.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>assets/dist/maps/jquery.vmap.indonesia.js" charset="utf-8"></script>
-<script>
-    var KTAppSettings = {
-        "breakpoints": {
-            "sm": 576,
-            "md": 768,
-            "lg": 992,
-            "xl": 1200,
-            "xxl": 1200
-        },
-        "colors": {
-            "theme": {
-                "base": {
-                    "white": "#ffffff",
-                    "primary": "#6993FF",
-                    "secondary": "#E5EAEE",
-                    "success": "#1BC5BD",
-                    "info": "#8950FC",
-                    "warning": "#FFA800",
-                    "danger": "#F64E60",
-                    "light": "#F3F6F9",
-                    "dark": "#212121"
-                },
-                "light": {
-                    "white": "#ffffff",
-                    "primary": "#E1E9FF",
-                    "secondary": "#ECF0F3",
-                    "success": "#C9F7F5",
-                    "info": "#EEE5FF",
-                    "warning": "#FFF4DE",
-                    "danger": "#FFE2E5",
-                    "light": "#F3F6F9",
-                    "dark": "#D6D6E0"
-                },
-                "inverse": {
-                    "white": "#ffffff",
-                    "primary": "#ffffff",
-                    "secondary": "#212121",
-                    "success": "#ffffff",
-                    "info": "#ffffff",
-                    "warning": "#ffffff",
-                    "danger": "#ffffff",
-                    "light": "#464E5F",
-                    "dark": "#ffffff"
-                }
-            },
-            "gray": {
-                "gray-100": "#F3F6F9",
-                "gray-200": "#ECF0F3",
-                "gray-300": "#E5EAEE",
-                "gray-400": "#D6D6E0",
-                "gray-500": "#B5B5C3",
-                "gray-600": "#80808F",
-                "gray-700": "#464E5F",
-                "gray-800": "#1B283F",
-                "gray-900": "#212121"
-            }
-        },
-        "font-family": "Poppins"
-    };
-</script>
-<script src="<?= base_url(); ?>assets/metronic/js/pages/features/charts/apexcharts.js"></script>
+<?php $this->view('template/_jsresource'); ?>
 <script>
     // jQuery(document).ready(function() {
 

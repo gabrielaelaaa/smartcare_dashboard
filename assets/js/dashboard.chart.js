@@ -85,8 +85,8 @@ var chartNationalSubscriber = new Chart('lineChart2', {
     data: {
         labels: natsubscriber.tanggal,
         datasets: [{
-                label: "Active",
-                data: natsubscriber.active,
+                label: "VLR",
+                data: natsubscriber.vlr,
                 pointRadius: 1,
                 backgroundColor: [
                     'rgba(105, 0, 132, .0)',
@@ -97,7 +97,7 @@ var chartNationalSubscriber = new Chart('lineChart2', {
                 borderWidth: 2
             },
             {
-                label: "Attach",
+                label: "SGSN",
                 data: natsubscriber.attach,
                 pointRadius: 1,
                 backgroundColor: [
