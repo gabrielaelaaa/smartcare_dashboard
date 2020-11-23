@@ -53,22 +53,20 @@
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/addons/flag.min.css" />
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/addons/datatables.min.css">
       <link href="<?= base_url(); ?>assets/dist/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
-      <script type="text/javascript" src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
-      <script type="text/javascript" src="<?= base_url(); ?>assets/js/moment.js"></script>
-      <script type="text/javascript" src="<?= base_url(); ?>assets/js/popper.min.js"></script>
-      <script type="text/javascript" src="<?= base_url(); ?>assets/js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="<?= base_url(); ?>assets/js/mdb.min.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
-      <script type="text/javascript" src="<?= base_url(); ?>assets/js/addons/flag.min.js"></script>
-      <script src="<?= base_url(); ?>assets/js/addons/datatables.min.js"></script>
-      <script type="text/javascript" src="<?= base_url(); ?>assets/dist/jquery.vmap.js"></script>
-      <script type="text/javascript" src="<?= base_url(); ?>assets/dist/maps/jquery.vmap.indonesia.js" charset="utf-8"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-      <title><?= $title; ?></title>
-
 
       <title><?= $title; ?></title>
 
+       <style>
+      
+
+        html,
+        body
+        {
+            height: 100%;
+        }
+
+       
+    </style>
 
 </head>
 

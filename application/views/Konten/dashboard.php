@@ -112,7 +112,7 @@
                     <span class="mb-2">National Subscriber</span>
                     <div class="row mb-3">
                         <div class="col-6">
-                            <div class='custom1'>
+                            <div class='custom1' data-toggle="tooltip" title="VLR Register Subscriber">
                                 <div class="row">
                                     <div class="col pr-0">
                                         <strong class="db">VLR</strong>
@@ -133,7 +133,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class='custom1'>
+                            <div class='custom1' data-toggle="tooltip" title="SGSN Attach Subscriber(2G+3G) + MME Attach Subscriber(4G)">
                                 <div class="row">
                                     <div class="col pr-0">
                                         <strong class="db">SGSN</strong>
@@ -704,6 +704,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <?php $this->view('template/_jsresource'); ?>
 <!-- Own Javascript Here -->
@@ -750,6 +751,10 @@
     }
 </script>
 <script>
+// Tooltips Initialization
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
     // Json Decode
     var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
     var datanatsubscriber = JSON.parse(' <?= $natsubscriber; ?>');
@@ -844,11 +849,11 @@
             `);
     }
     // Attach
-    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].sgsn;
-    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].sgsn;
+    nv_nowweek = datanatsubscriber[datanatsubscriber.length - 1].attach;
+    nv_lastweek = datanatsubscriber[datanatsubscriber.length - 2].attach;
     nv_delta = (nv_nowweek / nv_lastweek * 100) - 100;
     $('#nsattach-persen').text(nv_delta.toFixed(2) + " %");
-    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].sgsn);
+    total = parseFloat(datanatsubscriber[datanatsubscriber.length - 1].attach);
     $('#nsattach-sum').text(nFormatter(total, 2) + " Subs")
     if (nv_delta < 0) {
         $('#nsattach-persen').css("color", "red");
