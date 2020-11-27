@@ -129,14 +129,42 @@ class M_cei extends CI_Model
         ];
     }
 
-    function getDataAppCeiSiteLevel($region = "")
+    function getDataAppLevelCei($region = "",$week="")
     {
-        $ddate = date("Y-m-d");
-        $date = new DateTime($ddate);
-        // $week = (int)$date->format("W");
+        // $ddate = date("Y-m-d");
+        // $date = new DateTime($ddate);
+        // // $week = (int)$date->format("W");
 
-        $week_now = date('Y-m-d');
-        $week_minus1 = date('Y-m-d', strtotime('-1 Thursday'));
+        // $week_now = date('Y-m-d');
+        // $week_minus1 = date('Y-m-d', strtotime('-1 Thursday'));
+
+        
+        if($week != ""){
+            $date_normal = date( "Y-m-d", strtotime("2020"."W".$week."1") );
+            $date_custom_last = date("Y-m-d", strtotime($date_normal. ' Thursday'));
+            $date_custom_first = date("Y-m-d", strtotime($date_custom_last . '-1 Thursday'));
+            if ($region != "") {
+                $query = "select AVG(sc.s0s) as s0s ,AVG(sc.s60s) as s60s ,avg(sc.s70s) s70s,avg(sc.s80s) s80s,avg(sc.s90s) s90s,sc.region, si.service_names from service_cei sc 
+                INNER JOIN service_info si 
+                ON sc.service_id = si.service_id 
+                where daily between date '" . $date_custom_first . "' and date '" . $date_custom_last. "' and region = '" . $region . "'
+                group by sc.region, service_names order by service_names asc ";
+            }else{
+                $query = "select AVG(sc.s0s) as s0s ,AVG(sc.s60s) as s60s ,avg(sc.s70s) s70s,avg(sc.s80s) s80s,avg(sc.s90s) s90s,sc.region, si.service_names from service_cei sc 
+                INNER JOIN service_info si 
+                ON sc.service_id = si.service_id 
+                where daily between date '" . $date_custom_first . "' and date '" . $date_custom_last. "'
+                group by sc.region, service_names order by service_names asc ";
+            }
+    
+            // echo $date_custom;
+        }else{
+            $query = "select AVG(sc.s0s) as s0s ,AVG(sc.s60s) as s60s ,avg(sc.s70s) s70s,avg(sc.s80s) s80s,avg(sc.s90s) s90s,sc.region, si.service_names from service_cei sc 
+            INNER JOIN service_info si 
+            ON sc.service_id = si.service_id 
+           
+            group by sc.region, service_names order by service_names asc ";
+        }
         // $week_minus2 = date('Y-m-d', strtotime('-2 Thursday'));
         // $week_minus3 = date('Y-m-d', strtotime('-3 Thursday'));
         // $week_minus4 = date('Y-m-d', strtotime('-4 Thursday'));
@@ -148,19 +176,8 @@ class M_cei extends CI_Model
         //                     where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 . "' and region = '" . $region . "'";
         // $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from service_cei 
         //                     where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "' and region = '" . $region . "'";
-        if ($region != "") {
-            $query = "select AVG(sc.s0s) as s0s ,AVG(sc.s60s) as s60s ,avg(sc.s70s) s70s,avg(sc.s80s) s80s,avg(sc.s90s) s90s,sc.region, si.service_names from service_cei sc 
-            INNER JOIN service_info si 
-            ON sc.service_id = si.service_id 
-            where daily between date '" . $week_minus1 . "' and date '" . $week_now. "' and region = '" . $region . "'
-            group by sc.region, service_names order by service_names asc ";
-        }else{
-            $query = "select AVG(sc.s0s) as s0s ,AVG(sc.s60s) as s60s ,avg(sc.s70s) s70s,avg(sc.s80s) s80s,avg(sc.s90s) s90s,sc.region, si.service_names from service_cei sc 
-            INNER JOIN service_info si 
-            ON sc.service_id = si.service_id 
-            where daily between date '" . $week_minus1 . "' and date '" . $week_now. "'
-            group by sc.region, service_names order by service_names asc ";
-        }
+      
+
        
 
 
