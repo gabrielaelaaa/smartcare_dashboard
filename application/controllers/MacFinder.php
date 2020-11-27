@@ -78,7 +78,15 @@ class MacFinder extends CI_Controller
             9=>'user_label'
         );
         $search_columns = array(
-            0=>'mac_address'
+            0=>'vendor',
+            1=>'ne_name',
+            2=>'vlan_id',
+            3=>'vlan_port',
+            4=>'ipormask',
+            5=>'next_hop',
+            6=>'mask',
+            7=>'mac_address',
+            8=>'user_label'
         );
         if(!isset($valid_columns[$col]))
         {
@@ -181,7 +189,13 @@ class MacFinder extends CI_Controller
             7=>'interface'
         );
         $search_columns = array(
-            0=>'mac_address'
+            0=>'vendor',
+            1=>'ip_address',
+            2=>'ne_name',
+            3=>'slot_port',
+            4=>'mac_address',
+            5=>'vlan',
+            6=>'interface'
         );
         if(!isset($valid_columns[$col]))
         {
