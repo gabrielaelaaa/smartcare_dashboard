@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_cei extends CI_Model
 {
-    function getChartCeiPerRegion($region)
+    function getChartCeiPerRegion($region='')
     {
         $ddate = date("Y-m-d");
         $date = new DateTime($ddate);
@@ -14,14 +14,26 @@ class M_cei extends CI_Model
         $week_minus2 = date('Y-m-d', strtotime('-2 Thursday'));
         $week_minus3 = date('Y-m-d', strtotime('-3 Thursday'));
         $week_minus4 = date('Y-m-d', strtotime('-4 Thursday'));
-        $query_week_now = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
-                            where daily between date '" . $week_minus1 . "' and date '" . $week_now . "' and region = '" . $region . "'";
-        $query_minus1 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
-                            where daily between date '" . $week_minus2 . "' and date '" . $week_minus1 . "' and region = '" . $region . "'";
-        $query_minus2 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
-                            where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 . "' and region = '" . $region . "'";
-        $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
-                            where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "' and region = '" . $region . "'";
+        if ($region != '') {
+            $query_week_now = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus1 . "' and date '" . $week_now . "' and region = '" . $region . "'";
+            $query_minus1 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus2 . "' and date '" . $week_minus1 . "' and region = '" . $region . "'";
+            $query_minus2 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 . "' and region = '" . $region . "'";
+            $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "' and region = '" . $region . "'";
+        }else{
+            $query_week_now = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus1 . "' and date '" . $week_now ;
+            $query_minus1 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus2 . "' and date '" . $week_minus1 ;
+            $query_minus2 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 ;
+            $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 ;
+        }
+
 
 
         $res1 = $this->db->query($query_week_now);
