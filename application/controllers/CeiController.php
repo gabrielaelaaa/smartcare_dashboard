@@ -55,6 +55,10 @@ class CeiController extends CI_Controller
         $week = (int)$date->format("W");
         $weeks = [];
 
+        $dataCellLevelCei = $this->model->getChartCeiPerRegion();
+        $dataSubscriber = $this->model->getSubcriberLevelCei();
+        $dataAppCeiSiteLevel = $this->model->getDataAppCeiSiteLevel();
+
         for ($x = 0; $x < 4; $x++) {
             $weeks[$x] = $week;
             $week--;
@@ -62,7 +66,10 @@ class CeiController extends CI_Controller
         sort($weeks);
         echo json_encode([
             'status' => true,
-            'weeks' => $weeks
+            'weeks' => $weeks,
+            'dataCellLevelCEI' => $dataCellLevelCei,
+            'dataSubcriberLevelCei' => $dataSubscriber,
+            'dataAppCeiSiteLevel'=>$dataAppCeiSiteLevel
         ]);
     }
 
@@ -108,6 +115,47 @@ class CeiController extends CI_Controller
         // die;
     }
 
+    public function getDataAppCeiSiteLevel()
+    {
+        $region = $this->input->post('region');
+        // echo $region;
+        // die;
+        $status = false;
+        switch ($region) {
+            case "region1":
+                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("EAST JAVA_BALI NUSRA");
+                $status = $dataSubscriber['status'];
+                break;
+            case "region2":
+                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("CENTRAL_WEST JAVA");
+                $status = $dataSubscriber['status'];
+                break;
+            case "region3":
+                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("JABOTABEK");
+                $status = $dataSubscriber['status'];
+                break;
+            case "region4":
+                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("KALISUMAPA");
+                $status = $dataSubscriber['status'];
+                break;
+            case "region5":
+                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("SUMATERA");
+                $status = $dataSubscriber['status'];
+                break;
+            default:
+                $dataSubscriber['msg'] = "Region tidak ditemukan";
+        }
+
+        $res = [
+            "status" => $status,
+            "msg" => $status == false ? $dataSubscriber['msg'] : "",
+            "data" => $status == true ? $dataSubscriber['data'] : "",
+        ];
+        // $res = $region != null ? $this->model->getChartCeiPerRegion($region) : "data tidak di temukan";
+        echo json_encode($res);
+        // var_dump($data['data']);
+        // die;
+    }
     public function getSubcriberLevelCei()
     {
         $region = $this->input->post('region');
@@ -152,7 +200,7 @@ class CeiController extends CI_Controller
 
     public function getDataAppLevel()
     {
-        $data = $this->model->getDataChartAppLevel();
+        $data = $this->model->getDataAppCeiSiteLevel();
         $res = [
             'status' => true,
             'data' => $data,
@@ -163,49 +211,40 @@ class CeiController extends CI_Controller
 
     public function getTime()
     {
-        // $week_start = strtotime('last Sunday', time());
-        // $week_end = strtotime('next Sunday', time());
-
-        // $month_start = strtotime('first day of this month', time());
-        // $month_end = strtotime('last day of this month', time());
-
-        // $year_start = strtotime('first day of January', time());
-        // $year_end = strtotime('last day of December', time());
-        // echo "The time is " . date("H:i:s") . "<br/>";
-        // echo date('D, M jS Y', $week_start) . '<br/>';
-        // echo date('D, M jS Y', $week_end) . '<br/>';
-
-        // echo date('D, M jS Y', $month_start) . '<br/>';
-        // echo date('D, M jS Y', $month_end) . '<br/>';
-
-        // echo date('D, M jS Y', $year_start) . '<br/>';
-        // echo date('D, M jS Y', $year_end) . '<br/>';
-        // echo strtotime("last Monday");
-
         $ddate = date("Y-m-d");
-        // echo $ddate;
-        // $ddate = "2012-10-18";
         $date = new DateTime($ddate);
-        $week = $date->format("W");
-        // echo "Weeknummer: $week";
-        // echo "<br>";
-        echo "Weeknummer: " . $week;
+        $week = (int)$date->format("W");
 
-        echo "<br>";
-        echo date('Y-m-d'); //last Thursday
-        echo "<br>";
-        echo date('Y-m-d', strtotime('-1 Thursday')); //last Thursday
-        echo "<br>";
-        echo date('Y-m-d', strtotime('-2 Thursday')); //two Thursdays ago
-        echo "<br>";
-        echo date('Y-m-d', strtotime('-3 Thursday')); //two Thursdays ago
-        // echo "<br>";
-        // echo date('Y-m-d', strtotime('+1 Thursday')); //next Monday
-        // echo "<br>";
-        // echo date('Y-m-d', strtotime('Wednesday')); //next Monday
+        $week_now = date('Y-m-d');
+        $week_minus1 = date('Y-m-d', strtotime('-1 Thursday'));
+        $week_minus2 = date('Y-m-d', strtotime('-2 Thursday'));
+        $week_minus3 = date('Y-m-d', strtotime('-3 Thursday'));
+        $week_minus4 = date('Y-m-d', strtotime('-4 Thursday'));
 
-        // $now = new DateTime();
-        // $now->setTimezone(new DateTimeZone('etc/GMT+8'));
-        // echo $now->format('g:i A');
+        $query_week_now = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+            where daily between date '" . $week_minus1 . "' and date '" . $week_now . "'";
+        $query_minus1 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+            where daily between date '" . $week_minus2 . "' and date '" . $week_minus1 . "'";
+        $query_minus2 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+            where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 . "'";
+        $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from subscriber_cei clcr 
+            where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "'";
+
+        $query_week_now = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus1 . "' and date '" . $week_now . "'";
+        $query_minus1 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus2 . "' and date '" . $week_minus1 . "'";
+        $query_minus2 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus3 . "' and date '" . $week_minus2 . "'";
+        $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
+            where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "'";
+
+        echo $query_week_now;
+        echo "<br>";
+        echo $query_minus1; 
+        echo "<br>";
+        echo $query_minus2; 
+        echo "<br>";
+        echo $query_minus3; 
     }
 }
