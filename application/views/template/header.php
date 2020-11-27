@@ -41,6 +41,7 @@
       <link rel="stylesheet" href="<?= base_url('assets/admin-LTE3/plugins/summernote/summernote-bs4.css') ?>">
       <!-- Google Font: Source Sans Pro -->
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+      
 
       <!-- <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?= base_url(); ?>assets/img/favicon.ico" type="image/x-icon"> -->
@@ -52,6 +53,7 @@
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css" />
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/addons/flag.min.css" />
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/addons/datatables.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css">
     
 
       <title><?= $title; ?></title>
