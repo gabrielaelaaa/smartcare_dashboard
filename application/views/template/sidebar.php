@@ -49,6 +49,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('mac-finder') ?>" class="nav-link bg-red-indosat">
+                        <i class="fas fa-search nav-icon"></i>
+                        <p>
+                            Mac Adress Finder
+                        </p>
+                    </a>
+                </li>
 
                 <!-- 
                 <li class="nav-item has-treeview">
