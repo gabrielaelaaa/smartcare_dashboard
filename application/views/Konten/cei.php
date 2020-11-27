@@ -525,6 +525,30 @@
                 } else {
                     $("#vmap").vectorMap("set", "colors", changeColorRegion(code_SUMATERA, colorRegion[4]));
                 }
+            },  
+            onLabelShow:function (event, label, code_kota){
+                if (code_EAST_JAVA_BALI_NUSRA.indexOf(code_kota) !== -1) {
+                    label.html("East Java & Bali Nusra ");
+                    return
+                }
+                if (code_CENTRAL_WEST_JAVA.indexOf(code_kota) !== -1) {
+                    label.html("Central & West Java");
+                    return
+                }
+                if (code_JABODETABEK.indexOf(code_kota) !== -1) {
+                    label.html("Jakarta");
+                    return
+                }
+                if (code_KALISUMAPA.indexOf(code_kota) !== -1) {
+                    label.html("Kalisumapa");
+                    return
+                }
+                if (code_SUMATERA.indexOf(code_kota) !== -1) {
+                    label.html("Sumatera");
+                    return
+                }
+                event.preventDefault();
+                
             }
         });
         // $("#vmap").vectorMap({

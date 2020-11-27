@@ -52,7 +52,7 @@
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css" />
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/addons/flag.min.css" />
       <link rel="stylesheet" href="<?= base_url(); ?>assets/css/addons/datatables.min.css">
-      <link href="<?= base_url(); ?>assets/dist/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+    
 
       <title><?= $title; ?></title>
 
