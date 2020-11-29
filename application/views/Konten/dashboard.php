@@ -199,16 +199,93 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-5 pr-0">
+                    <!-- <div class="col-5 pr-0">
                         <div class="card p-4 mt-3 heightfull">
                             <h6 class="card-title" style="font-weight:600">Performance Check
                             </h6>
                         </div>
-                    </div>
-                    <div class="col-7">
+                    </div> -->
+                    <div class="col-12">
                         <div class="card p-4 mt-3 heightfull">
-                            <h6 class="card-title" style="font-weight:600">MS Pool</h6>
-                            <table id="mspool" class="table table-striped">
+                            <h6 class="card-title" style="font-weight:600">National TCP KQI Analysis</h6>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div style="text-align: center;">
+                                        <span class='judul'>TCP Success Rate</span>
+                                        <canvas width=250 height=150 id="gauge1"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div style="text-align: center;">
+                                        <span class='judul'>Client Side RTT Rate</span>
+                                        <canvas width=250 height=150 id="gauge2"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div style="text-align: center;">
+                                        <span class='judul'>Server Side RTT Rate</span>
+                                        <canvas width=250 height=150 id="gauge3"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div style="text-align: center;">
+                                        <span class='judul'>PDP Success Rate</span>
+                                        <canvas width=250 height=150 id="gauge4"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt-4">
+                                <div class="col-5">
+                                    <span class='judul mb-2'>Total Traffic (GB)</span>
+                                    <canvas id="chart2" height="200"></canvas>
+                                </div>
+                                <div class="col-5">
+                                    <span class='judul mb-2'>Packet Loss Rate</span>
+                                    <canvas id="chart3" height="200"></canvas>
+                                </div>
+                                <div class="col-2">
+                                    <div class="row mt-4">
+
+                                        <div class='custom1'>
+                                            <div class="row">
+                                                <div class="col pr-0">
+                                                    <strong class="db">E2E Delay</strong>
+                                                </div>
+                                                <div class="col pl-0">
+                                                    <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <span class="db persen" style="color:orange">4,78 Ms
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class='custom1'>
+                                            <div class="row">
+                                                <div class="col pr-0">
+                                                    <strong class="db">E2E Step1 Delay</strong>
+                                                    <small class="db text-muted">4,78 Ms</small>
+                                                </div>
+                                                <div class="col pl-0">
+                                                    <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <span class="db persen" style="color:orange">0.28
+                                                        %</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <table id="mspool" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">Name</th>
@@ -252,7 +329,7 @@
                                         <td><span class="badge badge-pill badge-danger">9.3 % <i class="fas fa-caret-up"></i></span></td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> -->
                         </div>
                     </div>
                 </div>
@@ -751,10 +828,10 @@
     }
 </script>
 <script>
-// Tooltips Initialization
-$(function () {
-$('[data-toggle="tooltip"]').tooltip()
-})
+    // Tooltips Initialization
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
     // Json Decode
     var datanetavailability = JSON.parse('<?= $networkavailability; ?>');
     var datanatsubscriber = JSON.parse(' <?= $natsubscriber; ?>');
@@ -884,7 +961,178 @@ $('[data-toggle="tooltip"]').tooltip()
 </script>
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.chart.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/dashboard.table.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>assets/js/gauge.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>assets/js/gauge.min.js"></script>
 <script>
+    var base_url = "<?= base_url() ?>"
+
+    $(document).ready(function() {
+
+        // gauge
+        var opts = {
+            angle: 0, // The span of the gauge arc
+            lineWidth: 0.3, // The line thickness
+            radiusScale: 0.95,
+            pointer: {
+                length: 0.5, // // Relative to gauge radius
+                strokeWidth: 0.082, // The thickness
+                color: '#000000' // Fill color
+            },
+            maxValue: 100,
+            staticLabels: {
+                font: "10px sans-serif", // Specifies font
+                labels: [0, 50, 100], // Print labels at these values
+                color: "#000000", // Optional: Label text color
+            },
+            minValue: 0,
+            animationSpeed: 32,
+            limitMax: false, // If false, max value increases automatically if value > maxValue
+            limitMin: false, // If true, the min value of the gauge will be fixed
+            strokeColor: '#E0E0E0', // to see which ones work best for you
+            staticZones: [{
+                    strokeStyle: "#F03E3E",
+                    min: 0,
+                    max: 35
+                }, // Red from 100 to 130
+                {
+                    strokeStyle: "#FFDD00",
+                    min: 36,
+                    max: 65
+                }, // Yellow
+                {
+                    strokeStyle: "#30B32D",
+                    min: 66,
+                    max: 100
+                } // Green
+            ],
+            generateGradient: true,
+            highDpiSupport: true, // High resolution support
+
+        };
+        var target = document.getElementById('gauge1'); // your canvas element
+        var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+        gauge.set(100); // set actual value
+
+        var target2 = document.getElementById('gauge2'); // your canvas element
+        var gauge2 = new Gauge(target2).setOptions(opts); // create sexy gauge!
+        gauge2.set(100); // set actual value
+
+        var target3 = document.getElementById('gauge3'); // your canvas element
+        var gauge3 = new Gauge(target3).setOptions(opts); // create sexy gauge!
+        gauge3.set(100); // set actual value
+
+        var target4 = document.getElementById('gauge4'); // your canvas element
+        var gauge4 = new Gauge(target4).setOptions(opts); // create sexy gauge!
+        gauge4.set(100); // set actual value
+        // gauge
+
+        // bar
+        let data_total_traffic;
+        $.ajax({
+            url: base_url + "Dashboard/loadData",
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(respon) {
+                // console.log(respon)
+                if (respon.status == true) {
+                    console.log(respon)
+                    state.weeks_xaxis = respon.weeks;
+                    $('#week').html("<i>(week " + respon.weeks[3] + ")</i>")
+                    data_detractor_CellLevelCEI = [respon.dataCellLevelCEI.data[3].data.detractor, respon.dataCellLevelCEI.data[2].data.detractor, respon.dataCellLevelCEI.data[1].data.detractor, respon.dataCellLevelCEI.data[0].data.detractor]
+                    data_passive_CellLevelCEI = [respon.dataCellLevelCEI.data[3].data.passive, respon.dataCellLevelCEI.data[2].data.passive, respon.dataCellLevelCEI.data[1].data.passive, respon.dataCellLevelCEI.data[0].data.passive]
+                    data_promoter_CellLevelCEI = [respon.dataCellLevelCEI.data[3].data.promoter, respon.dataCellLevelCEI.data[2].data.promoter, respon.dataCellLevelCEI.data[1].data.promoter, respon.dataCellLevelCEI.data[0].data.promoter]
+
+                    data_detractor_SubcriberLevelCei = [respon.dataSubcriberLevelCei.data[3].data.detractor, respon.dataSubcriberLevelCei.data[2].data.detractor, respon.dataSubcriberLevelCei.data[1].data.detractor, respon.dataSubcriberLevelCei.data[0].data.detractor]
+                    data_passive_SubcriberLevelCei = [respon.dataSubcriberLevelCei.data[3].data.passive, respon.dataSubcriberLevelCei.data[2].data.passive, respon.dataSubcriberLevelCei.data[1].data.passive, respon.dataSubcriberLevelCei.data[0].data.passive]
+                    data_promoter_SubcriberLevelCei = [respon.dataSubcriberLevelCei.data[3].data.promoter, respon.dataSubcriberLevelCei.data[2].data.promoter, respon.dataSubcriberLevelCei.data[1].data.promoter, respon.dataSubcriberLevelCei.data[0].data.promoter]
+                    //    console.log(respon.dataAppCeiSiteLevel.data.length > 0);
+                    if (respon.dataAppCeiSiteLevel.data.length > 0) {
+                        s0s = [respon.dataAppCeiSiteLevel.data[0]['s0s'], respon.dataAppCeiSiteLevel.data[1]['s0s'], respon.dataAppCeiSiteLevel.data[2]['s0s'], respon.dataAppCeiSiteLevel.data[3]['s0s'], respon.dataAppCeiSiteLevel.data[4]['s0s'], respon.dataAppCeiSiteLevel.data[5]['s0s'], respon.dataAppCeiSiteLevel.data[6]['s0s'], respon.dataAppCeiSiteLevel.data[7]['s0s'], respon.dataAppCeiSiteLevel.data[8]['s0s'], respon.dataAppCeiSiteLevel.data[9]['s0s'], respon.dataAppCeiSiteLevel.data[10]['s0s']]
+                        s60s = [respon.dataAppCeiSiteLevel.data[0]['s60s'], respon.dataAppCeiSiteLevel.data[1]['s60s'], respon.dataAppCeiSiteLevel.data[2]['s60s'], respon.dataAppCeiSiteLevel.data[3]['s60s'], respon.dataAppCeiSiteLevel.data[4]['s60s'], respon.dataAppCeiSiteLevel.data[5]['s60s'], respon.dataAppCeiSiteLevel.data[6]['s60s'], respon.dataAppCeiSiteLevel.data[7]['s60s'], respon.dataAppCeiSiteLevel.data[8]['s60s'], respon.dataAppCeiSiteLevel.data[9]['s60s'], respon.dataAppCeiSiteLevel.data[10]['s60s']]
+                        s70s = [respon.dataAppCeiSiteLevel.data[0]['s70s'], respon.dataAppCeiSiteLevel.data[1]['s70s'], respon.dataAppCeiSiteLevel.data[2]['s70s'], respon.dataAppCeiSiteLevel.data[3]['s70s'], respon.dataAppCeiSiteLevel.data[4]['s70s'], respon.dataAppCeiSiteLevel.data[5]['s70s'], respon.dataAppCeiSiteLevel.data[6]['s70s'], respon.dataAppCeiSiteLevel.data[7]['s70s'], respon.dataAppCeiSiteLevel.data[8]['s70s'], respon.dataAppCeiSiteLevel.data[9]['s70s'], respon.dataAppCeiSiteLevel.data[10]['s70s']]
+                        s80s = [respon.dataAppCeiSiteLevel.data[0]['s80s'], respon.dataAppCeiSiteLevel.data[1]['s80s'], respon.dataAppCeiSiteLevel.data[2]['s80s'], respon.dataAppCeiSiteLevel.data[3]['s80s'], respon.dataAppCeiSiteLevel.data[4]['s80s'], respon.dataAppCeiSiteLevel.data[5]['s80s'], respon.dataAppCeiSiteLevel.data[6]['s80s'], respon.dataAppCeiSiteLevel.data[7]['s80s'], respon.dataAppCeiSiteLevel.data[8]['s80s'], respon.dataAppCeiSiteLevel.data[9]['s80s'], respon.dataAppCeiSiteLevel.data[10]['s80s']]
+                        s90s = [respon.dataAppCeiSiteLevel.data[0]['s90s'], respon.dataAppCeiSiteLevel.data[1]['s90s'], respon.dataAppCeiSiteLevel.data[2]['s90s'], respon.dataAppCeiSiteLevel.data[3]['s90s'], respon.dataAppCeiSiteLevel.data[4]['s90s'], respon.dataAppCeiSiteLevel.data[5]['s90s'], respon.dataAppCeiSiteLevel.data[6]['s90s'], respon.dataAppCeiSiteLevel.data[7]['s90s'], respon.dataAppCeiSiteLevel.data[8]['s90s'], respon.dataAppCeiSiteLevel.data[9]['s90s'], respon.dataAppCeiSiteLevel.data[10]['s90s']]
+                    }
+                } else {
+                    console.log(respon.gettotaltraffic.data[0][id])
+                }
+            },
+            error: function() {}
+
+        });
+        var options2 = {
+            type: 'bar',
+            // data: {
+            //     labels: state.weeks_xaxis,
+            //     datasets: [{
+            //             label: 'detractor',
+            //             // data: data_detractor_SubcriberLevelCei,
+            //             backgroundColor: '#F44336',
+            //         },
+            //         {
+            //             label: 'passive',
+            //             // data: data_passive_SubcriberLevelCei,
+            //             backgroundColor: '#28df99',
+            //         },
+            //         {
+            //             label: 'promoter',
+            //             // data: data_promoter_SubcriberLevelCei,
+            //             backgroundColor: '#43658b',
+            //         }
+            //     ]
+            // },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        };
+        var ctx2 = document.getElementById('chart2');
+        myChart2 = new Chart(ctx2, options2);
+
+        var options3 = {
+            type: 'bar',
+            // data: {
+            //     labels: state.weeks_xaxis,
+            //     datasets: [{
+            //             label: 'detractor',
+            //             // data: data_detractor_SubcriberLevelCei,
+            //             backgroundColor: '#F44336',
+            //         },
+            //         {
+            //             label: 'passive',
+            //             // data: data_passive_SubcriberLevelCei,
+            //             backgroundColor: '#28df99',
+            //         },
+            //         {
+            //             label: 'promoter',
+            //             // data: data_promoter_SubcriberLevelCei,
+            //             backgroundColor: '#43658b',
+            //         }
+            //     ]
+            // },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        };
+        var ctx3 = document.getElementById('chart3');
+        myChart3 = new Chart(ctx3, options3);
+        // bar
+    });
+
     jQuery(document).ready(function() {
         jQuery('#vmap').vectorMap({
             map: 'indonesia_id',

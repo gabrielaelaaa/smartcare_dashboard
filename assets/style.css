@@ -1,14 +1,14 @@
 .bg-yellow-indosat {
-    background-color: #FBC02D !important;
+	background-color: #FBC02D !important;
 }
 
 .bg-red-indosat {
-    color: #D32F2F !important;
+	color: #D32F2F !important;
 }
 
 a.bg-red-indosat:hover,
 a.bg-red-indosat:focus {
-    color: #ffffff !important;
+	color: #ffffff !important;
 }
 
 /*a.bg-yellow-indosat:hover, a.bg-yellow-indosat:focus,*/
@@ -18,11 +18,16 @@ a.bg-red-indosat:focus {
 /*}*/
 
 .bg-yellow-indosat>.sidebar>a {
-    color: #D32F2F !important;
+	color: #D32F2F !important;
 }
 
 .dropdown-item.test:hover,
 .dropdown-item.test:focus {
-    color: #ffffff !important;
-    background-color: #D32F2F !important;
+	color: #ffffff !important;
+	background-color: #D32F2F !important;
+}
+
+
+.zc-ref {
+	display: none;
 }
