@@ -41,8 +41,6 @@
   <link rel="stylesheet" href="<?= base_url('assets/admin-LTE3/plugins/summernote/summernote-bs4.css') ?>">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-
   <!-- <link rel="shortcut icon" href="<?= base_url(); ?>assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="<?= base_url(); ?>assets/img/favicon.ico" type="image/x-icon"> -->
   <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>

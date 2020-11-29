@@ -8,31 +8,45 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col">
-                        <div id="vmap" style="width: 100%; height: 350px;">
+                        <div id="vmap" style="width: 100%; height: 400px;">
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <div class="card p-4 pt-0">
+        <div class="card p-4 pt-0 mb-5">
             <h6 class="card-title" style="font-weight:600">CEI Analysis</h6>
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-4">
                     <span class="mb-2">Cell Level CEI</span>
                     <!--begin::Chart-->
                     <canvas id="chart" height="150"></canvas>
                     <!--end::Chart-->
                 </div>
-                <div class="col-4">
+                <div class="col-md-4">
                     <span class="mb-2">Subscriber Level CEI</span>
                     <canvas id="chart2" height="150"></canvas>
                     <!--begin::Chart-->
                     <!-- <canvas id="chart"></canvas> -->
                     <!--end::Chart-->
                 </div>
-                <div class="col-4">
-                    <span class="mb-2">App Level CEI</span>
+                <div class="col-md-4">
+                    <!-- <span class="mb-2">App Level CEIApp Level CEI</span>
+                    <select class="form-control form-control-sm" style="display: inline-block;">
+                        <option>Choose Week in to display</option>
+                    </select> -->
+                    <form class="form-inline">
+                        <label class="my-1 mr-2" for="weeks_app_level_cei"><span class="font-weight-normal">App Level CEI</span></label>
+                        <select class="form-control form-control-sm my-1 mr-sm-2" id="select_weeks_app_level_cei">
+                            <option selected value="">choose weeks into display</option>
+                            <!-- <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option> -->
+                        </select>
+                    </form>
+
                     <canvas id="chart3" height="150"></canvas>
                     <!--begin::Chart-->
                     <!-- <canvas id="chart"></canvas> -->
@@ -60,6 +74,8 @@
                 </div> -->
         </div>
 
+        <div style="min-height: 5px;"></div>
+
         <!-- </div> -->
     </div>
 </div>
@@ -74,7 +90,8 @@
     var base_url = "<?= base_url() ?>"
     var state = {
         seleted_region: "",
-        weeks_xaxis: ""
+        weeks_xaxis: "",
+        week_seleted: ""
     };
     const chart_level_subscriber = "#chart_level_subscriber";
     const chart_app_level = "#chart_app_level";
@@ -112,44 +129,65 @@
 
 
 
-
+        let data_detractor_CellLevelCEI, data_passive_CellLevelCEI, data_promoter_CellLevelCEI;
+        let data_detractor_SubcriberLevelCei, data_passive_SubcriberLevelCei, data_promoter_SubcriberLevelCei;
+        let s0s, s60s, s70s, s80s, s90s;
         $.ajax({
             url: base_url + "CeiController/loadData",
             type: "GET",
             dataType: 'json',
             async: false,
             success: function(respon) {
-                console.log(respon)
+                // console.log(respon)
                 if (respon.status == true) {
+                    console.log(respon)
                     state.weeks_xaxis = respon.weeks;
-                    // chart1.destroy();
-                    // reload_chart1(respon.data);
-                    // console.log(respon.data[0].promoter)
-                } else {
+                    $('#week').html("<i>(week " + respon.weeks[3] + ")</i>")
+                    data_detractor_CellLevelCEI = [respon.dataCellLevelCEI.data[3].data.detractor, respon.dataCellLevelCEI.data[2].data.detractor, respon.dataCellLevelCEI.data[1].data.detractor, respon.dataCellLevelCEI.data[0].data.detractor]
+                    data_passive_CellLevelCEI = [respon.dataCellLevelCEI.data[3].data.passive, respon.dataCellLevelCEI.data[2].data.passive, respon.dataCellLevelCEI.data[1].data.passive, respon.dataCellLevelCEI.data[0].data.passive]
+                    data_promoter_CellLevelCEI = [respon.dataCellLevelCEI.data[3].data.promoter, respon.dataCellLevelCEI.data[2].data.promoter, respon.dataCellLevelCEI.data[1].data.promoter, respon.dataCellLevelCEI.data[0].data.promoter]
 
+                    data_detractor_SubcriberLevelCei = [respon.dataSubcriberLevelCei.data[3].data.detractor, respon.dataSubcriberLevelCei.data[2].data.detractor, respon.dataSubcriberLevelCei.data[1].data.detractor, respon.dataSubcriberLevelCei.data[0].data.detractor]
+                    data_passive_SubcriberLevelCei = [respon.dataSubcriberLevelCei.data[3].data.passive, respon.dataSubcriberLevelCei.data[2].data.passive, respon.dataSubcriberLevelCei.data[1].data.passive, respon.dataSubcriberLevelCei.data[0].data.passive]
+                    data_promoter_SubcriberLevelCei = [respon.dataSubcriberLevelCei.data[3].data.promoter, respon.dataSubcriberLevelCei.data[2].data.promoter, respon.dataSubcriberLevelCei.data[1].data.promoter, respon.dataSubcriberLevelCei.data[0].data.promoter]
+                    //    console.log(respon.dataAppCeiSiteLevel.data.length > 0);
+                    if (respon.dataAppCeiSiteLevel.data.length > 0) {
+                        s0s = [respon.dataAppCeiSiteLevel.data[0]['s0s'], respon.dataAppCeiSiteLevel.data[1]['s0s'], respon.dataAppCeiSiteLevel.data[2]['s0s'], respon.dataAppCeiSiteLevel.data[3]['s0s'], respon.dataAppCeiSiteLevel.data[4]['s0s'], respon.dataAppCeiSiteLevel.data[5]['s0s'], respon.dataAppCeiSiteLevel.data[6]['s0s'], respon.dataAppCeiSiteLevel.data[7]['s0s'], respon.dataAppCeiSiteLevel.data[8]['s0s'], respon.dataAppCeiSiteLevel.data[9]['s0s'], respon.dataAppCeiSiteLevel.data[10]['s0s']]
+                        s60s = [respon.dataAppCeiSiteLevel.data[0]['s60s'], respon.dataAppCeiSiteLevel.data[1]['s60s'], respon.dataAppCeiSiteLevel.data[2]['s60s'], respon.dataAppCeiSiteLevel.data[3]['s60s'], respon.dataAppCeiSiteLevel.data[4]['s60s'], respon.dataAppCeiSiteLevel.data[5]['s60s'], respon.dataAppCeiSiteLevel.data[6]['s60s'], respon.dataAppCeiSiteLevel.data[7]['s60s'], respon.dataAppCeiSiteLevel.data[8]['s60s'], respon.dataAppCeiSiteLevel.data[9]['s60s'], respon.dataAppCeiSiteLevel.data[10]['s60s']]
+                        s70s = [respon.dataAppCeiSiteLevel.data[0]['s70s'], respon.dataAppCeiSiteLevel.data[1]['s70s'], respon.dataAppCeiSiteLevel.data[2]['s70s'], respon.dataAppCeiSiteLevel.data[3]['s70s'], respon.dataAppCeiSiteLevel.data[4]['s70s'], respon.dataAppCeiSiteLevel.data[5]['s70s'], respon.dataAppCeiSiteLevel.data[6]['s70s'], respon.dataAppCeiSiteLevel.data[7]['s70s'], respon.dataAppCeiSiteLevel.data[8]['s70s'], respon.dataAppCeiSiteLevel.data[9]['s70s'], respon.dataAppCeiSiteLevel.data[10]['s70s']]
+                        s80s = [respon.dataAppCeiSiteLevel.data[0]['s80s'], respon.dataAppCeiSiteLevel.data[1]['s80s'], respon.dataAppCeiSiteLevel.data[2]['s80s'], respon.dataAppCeiSiteLevel.data[3]['s80s'], respon.dataAppCeiSiteLevel.data[4]['s80s'], respon.dataAppCeiSiteLevel.data[5]['s80s'], respon.dataAppCeiSiteLevel.data[6]['s80s'], respon.dataAppCeiSiteLevel.data[7]['s80s'], respon.dataAppCeiSiteLevel.data[8]['s80s'], respon.dataAppCeiSiteLevel.data[9]['s80s'], respon.dataAppCeiSiteLevel.data[10]['s80s']]
+                        s90s = [respon.dataAppCeiSiteLevel.data[0]['s90s'], respon.dataAppCeiSiteLevel.data[1]['s90s'], respon.dataAppCeiSiteLevel.data[2]['s90s'], respon.dataAppCeiSiteLevel.data[3]['s90s'], respon.dataAppCeiSiteLevel.data[4]['s90s'], respon.dataAppCeiSiteLevel.data[5]['s90s'], respon.dataAppCeiSiteLevel.data[6]['s90s'], respon.dataAppCeiSiteLevel.data[7]['s90s'], respon.dataAppCeiSiteLevel.data[8]['s90s'], respon.dataAppCeiSiteLevel.data[9]['s90s'], respon.dataAppCeiSiteLevel.data[10]['s90s']]
+                    }
+                } else {
+                    console.log(respon)
                 }
             },
             error: function() {}
 
         });
 
+        state.weeks_xaxis.forEach(value => {
+            $('#select_weeks_app_level_cei').append(`<option value="${value}"> 
+                                       Week ${value} 
+                                  </option>`)
+        })
         let options = {
             type: 'bar',
             data: {
                 labels: state.weeks_xaxis,
                 datasets: [{
                         label: 'detractor',
-                        data: [0],
+                        data: data_detractor_CellLevelCEI,
                         backgroundColor: '#F44336',
                     },
                     {
                         label: 'passive',
-                        data: [0],
+                        data: data_passive_CellLevelCEI,
                         backgroundColor: '#28df99',
                     },
                     {
                         label: 'promoter',
-                        data: [0],
+                        data: data_promoter_CellLevelCEI,
                         backgroundColor: '#43658b',
                     }
                 ]
@@ -168,28 +206,60 @@
         let options2 = {
             type: 'bar',
             data: {
-                labels: ["all", "im", "sms", "stream", "voice", "web"],
+                labels: state.weeks_xaxis,
+                datasets: [{
+                        label: 'detractor',
+                        data: data_detractor_SubcriberLevelCei,
+                        backgroundColor: '#F44336',
+                    },
+                    {
+                        label: 'passive',
+                        data: data_passive_SubcriberLevelCei,
+                        backgroundColor: '#28df99',
+                    },
+                    {
+                        label: 'promoter',
+                        data: data_promoter_SubcriberLevelCei,
+                        backgroundColor: '#43658b',
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        };
+        let options3 = {
+            type: 'bar',
+            data: {
+                labels: ["FileAccess", "Game", "IM", "SMS", "Stream", "VideoMes", "Voice", "VoiceMes", "VoIP", "VoLTE", "Web"],
                 datasets: [{
                         label: 's0s',
-                        data: [0],
+                        data: s0s,
                         backgroundColor: '#af2d2d',
                     },
                     {
                         label: 's60s',
-                        data: [0],
+                        data: s60s,
                         backgroundColor: '#f9813a',
                     },
                     {
                         label: 's70s',
-                        data: [0],
+                        data: s70s,
                         backgroundColor: '#f1e189',
                     }, {
                         label: 's80s',
-                        data: [0],
+                        data: s80s,
                         backgroundColor: '#cee397',
                     }, {
                         label: 's90s',
-                        data: [0],
+                        data: s90s,
                         backgroundColor: '#baf1a1',
                     },
                 ]
@@ -206,17 +276,18 @@
             }
         };
 
+
         var ctx = document.getElementById('chart');
         myChart = new Chart(ctx, options);
         var ctx2 = document.getElementById('chart2');
-        myChart2 = new Chart(ctx2, options);
+        myChart2 = new Chart(ctx2, options2);
         var ctx3 = document.getElementById('chart3');
-        myChart3 = new Chart(ctx3, options2);
+        myChart3 = new Chart(ctx3, options3);
         my_maps();
     });
 
     function reloadDataCellLevelCei(region) {
-        let url = "<?= base_url() ?>/CeiController/getDataSubscriberCeiRegion";
+        let url = "<?= base_url() ?>/CeiController/getDataCellLevelCei";
         let param = {
             region
         };
@@ -267,6 +338,7 @@
             data: param,
             success: function(respon) {
                 if (respon.status == true) {
+
                     myChart2.destroy();
                     reload_chart2(respon.data);
                 } else {}
@@ -277,9 +349,10 @@
     }
 
     function reloadDataAppCeiSiteLevel(region) {
-        let url = "<?= base_url() ?>/CeiController/getDataSubscriberCeiRegion";
+        let url = "<?= base_url() ?>/CeiController/getDataAppLevelCei";
         let param = {
-            region
+            region,
+            week: state.week_seleted
         };
         $.ajax({
 
@@ -292,8 +365,12 @@
             data: param,
             success: function(respon) {
                 if (respon.status == true) {
-                    myChart3.destroy();
-                    reload_chart3(respon.data);
+                    if (respon)
+                        console.log(respon.data)
+                    if (respon.data.length > 0) {
+                        myChart3.destroy();
+                        reload_chart3(respon.data);
+                    }
                 } else {}
             },
             error: function() {}
@@ -388,46 +465,91 @@
         // const apexChart = "#chart_isat";
 
 
-        let options = {
-            type: 'bar',
-            data: {
-                labels: ["all", "im", "sms", "stream", "voice", "web"],
-                datasets: [{
-                        label: 's0s',
-                        data: [4, 5, 7, 8, 2, 1],
-                        backgroundColor: '#af2d2d',
-                    },
-                    {
-                        label: 's60s',
-                        data: [3, 8, 4, 1, 1, 8],
-                        backgroundColor: '#f9813a',
-                    },
-                    {
-                        label: 's70s',
-                        data: [3, 4, 2, 6, 9, 2],
-                        backgroundColor: '#f1e189',
-                    }, {
-                        label: 's80s',
-                        data: [9, 9, 8, 2, 4, 1],
-                        backgroundColor: '#cee397',
-                    }, {
-                        label: 's90s',
-                        data: [4, 2, 1, 6, 7, 8],
-                        backgroundColor: '#baf1a1',
-                    },
-                ]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        stacked: true
-                    }],
-                    yAxes: [{
-                        stacked: true
-                    }]
+        let options;
+
+        if (data == "") {
+            options = {
+                type: 'bar',
+                data: {
+                    labels: ["FileAccess", "Game", "IM", "SMS", "Stream", "VideoMes", "Voice", "VoiceMes", "VoIP", "VoLTE", "Web"],
+                    datasets: [{
+                            label: 's0s',
+                            data: [0],
+                            backgroundColor: '#af2d2d',
+                        },
+                        {
+                            label: 's60s',
+                            data: [0],
+                            backgroundColor: '#f9813a',
+                        },
+                        {
+                            label: 's70s',
+                            data: [0],
+                            backgroundColor: '#f1e189',
+                        }, {
+                            label: 's80s',
+                            data: [0],
+                            backgroundColor: '#cee397',
+                        }, {
+                            label: 's90s',
+                            data: [0],
+                            backgroundColor: '#baf1a1',
+                        },
+                    ]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
                 }
-            }
-        };
+            };
+        } else {
+            options = {
+                type: 'bar',
+                data: {
+                    labels: ["FileAccess", "Game", "IM", "SMS", "Stream", "VideoMes", "Voice", "VoiceMes", "VoIP", "VoLTE", "Web"],
+                    datasets: [{
+                            label: 's0s',
+                            data: [data[0]['s0s'], data[1]['s0s'], data[2]['s0s'], data[3]['s0s'], data[4]['s0s'], data[5]['s0s'], data[6]['s0s'], data[7]['s0s'], data[8]['s0s'], data[9]['s0s'], data[10]['s0s']],
+                            backgroundColor: '#af2d2d',
+                        },
+                        {
+                            label: 's60s',
+                            data: [data[0]['s60s'], data[1]['s60s'], data[2]['s60s'], data[3]['s60s'], data[4]['s60s'], data[5]['s60s'], data[6]['s60s'], data[7]['s60s'], data[8]['s60s'], data[9]['s60s'], data[10]['s60s']],
+                            backgroundColor: '#f9813a',
+                        },
+                        {
+                            label: 's70s',
+                            data: [data[0]['s70s'], data[1]['s70s'], data[2]['s70s'], data[3]['s70s'], data[4]['s70s'], data[5]['s70s'], data[6]['s70s'], data[7]['s70s'], data[8]['s70s'], data[9]['s70s'], data[10]['s70s']],
+                            backgroundColor: '#f1e189',
+                        }, {
+                            label: 's80s',
+                            data: [data[0]['s80s'], data[1]['s80s'], data[2]['s80s'], data[3]['s80s'], data[4]['s80s'], data[5]['s80s'], data[6]['s80s'], data[7]['s80s'], data[8]['s80s'], data[9]['s80s'], data[10]['s80s']],
+                            backgroundColor: '#cee397',
+                        }, {
+                            label: 's90s',
+                            data: [data[0]['s90s'], data[1]['s90s'], data[2]['s90s'], data[3]['s90s'], data[4]['s90s'], data[5]['s90s'], data[6]['s90s'], data[7]['s90s'], data[8]['s90s'], data[9]['s90s'], data[10]['s90s']],
+                            backgroundColor: '#baf1a1',
+                        },
+                    ]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                }
+            };
+        }
 
 
         var ctx = document.getElementById('chart3');
@@ -525,30 +647,31 @@
                 } else {
                     $("#vmap").vectorMap("set", "colors", changeColorRegion(code_SUMATERA, colorRegion[4]));
                 }
-            },  
-            onLabelShow:function (event, label, code_kota){
+            },
+            onLabelShow: function(event, label, code_kota) {
                 if (code_EAST_JAVA_BALI_NUSRA.indexOf(code_kota) !== -1) {
-                    label.html("East Java & Bali Nusra ");
+                    label.html("EAST_JAVA_BALI_NUSRA");
                     return
                 }
                 if (code_CENTRAL_WEST_JAVA.indexOf(code_kota) !== -1) {
-                    label.html("Central & West Java");
+                    label.html("CENTRAL_WEST_JAVA");
                     return
                 }
                 if (code_JABODETABEK.indexOf(code_kota) !== -1) {
-                    label.html("Jakarta");
+                    label.html("JABODETABEK");
                     return
                 }
                 if (code_KALISUMAPA.indexOf(code_kota) !== -1) {
-                    label.html("Kalisumapa");
+                    label.html("KALISUMAPA");
                     return
                 }
                 if (code_SUMATERA.indexOf(code_kota) !== -1) {
-                    label.html("Sumatera");
+                    label.html("SUMATERA");
                     return
                 }
                 event.preventDefault();
-                
+
+
             }
         });
         // $("#vmap").vectorMap({
@@ -633,4 +756,42 @@
         });
         return obj_new;
     }
+
+    $("#select_weeks_app_level_cei").change(function() {
+        // alert(`The text has been changed. ${this.value}`);
+        state.week_seleted = this.value
+        let url = "<?= base_url() ?>/CeiController/getDataAppLevelCei";
+        let param = {
+            region: state.region_selected,
+            week: this.value
+        };
+        $.ajax({
+
+            url: url,
+
+            type: "POST",
+
+            dataType: 'json',
+
+            data: param,
+            success: function(respon) {
+                // console.log(respon)
+                // return;
+                if (respon.status == true) {
+                    if (respon)
+                        // console.log(respon.data)
+                        if (respon.data.length > 0) {
+                            myChart3.destroy();
+                            reload_chart3(respon.data);
+                        } else {
+                            alert("datasheet not available!!!");
+                            myChart3.destroy();
+                            reload_chart3("");
+                        }
+                } else {}
+            },
+            error: function() {}
+
+        });
+    })
 </script>

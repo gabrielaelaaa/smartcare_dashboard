@@ -54,5 +54,6 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 $route['login'] = 'login';
 $route['logout'] = 'logout';
+$route['mac-finder'] = 'MacFinder';
 $route['(:any)'] = 'dashboard/$1';
 
