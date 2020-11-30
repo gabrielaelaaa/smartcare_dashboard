@@ -15,8 +15,8 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Voice</strong>
-                                        <small class="db text-muted">4,78 MErl</small>
+                                        <strong class="db">Data</strong>
+                                        <small class="db text-muted">4,78 TBytes</small>
                                     </div>
                                     <div class="col pl-0">
                                         <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
@@ -40,7 +40,7 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Traffic Total</strong>
+                                        <strong class="db">Voice</strong>
                                         <small id="voicetotal-sum" class="db text-muted">53.518
                                             Erlang</small>
                                     </div>
@@ -81,13 +81,13 @@
                     <canvas id="lineChart" height="180"></canvas>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <span class="mb-2">Network Availability</span>
+                <span class="mb-2">SMS Traffic</span>
                     <div class="row mb-3">
                         <div class="col-6">
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Today Availability</strong>
+                                        <strong class="db">SMS</strong>
                                         <small id="netavail-sum" class="db text-muted">53.518
                                             Erlang</small>
                                     </div>
@@ -106,8 +106,57 @@
                             </div>
                         </div>
                     </div>
-                    <canvas id="lineChart5" height="180"></canvas>
+                    <canvas id="lineChartsms" height="180"></canvas>
                 </div>
+                    <!-- <span class="mb-2">Network Availability</span>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class='custom1'>
+                                <div class="row">
+                                    <div class="col pr-0">
+                                        <strong class="db">4G</strong>
+                                        <small id="netavail-sum" class="db text-muted">53.518
+                                            Erlang</small>
+                                    </div>
+                                    <div class="col pl-0">
+                                        <div id="netavail-icon">
+                                            <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span id="netavail-persen" class="db persen voiceerlang">0.28
+                                            %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class='custom1'>
+                                <div class="row">
+                                    <div class="col pr-0">
+                                        <strong class="db">3G</strong>
+                                        <small id="netavail-3gsum" class="db text-muted">53.518
+                                            Erlang</small>
+                                    </div>
+                                    <div class="col pl-0">
+                                        <div id="netavail-3gicon">
+                                            <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span id="netavail-3gpersen" class="db persen voiceerlang">0.28
+                                            %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="lineChart5" height="180"></canvas>
+                </div> -->
                 <div class="col-md-6 col-lg-3">
                     <span class="mb-2">National Subscriber</span>
                     <div class="row mb-3">
@@ -158,6 +207,9 @@
                     <!--  -->
 
                 </div>
+                <div class="col-12 text-center">
+                    <small class="text-muted">All percentages compared to yesterday</small>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -173,17 +225,10 @@
 
                                 <div class="col">
                                     <div class="row">
-                                        <div class="col-4">
-                                            <span class='judul' style="font-weight:600">2G</span>
-                                            <canvas id="doughnutChart"></canvas>
-                                        </div>
-                                        <div class="col-4">
-                                            <span class='judul' style="font-weight:600">3G</span>
-                                            <canvas id="doughnutChart2"></canvas>
-                                        </div>
-                                        <div class="col-4">
-                                            <span class='judul' style="font-weight:600">4G</span>
-                                            <canvas id="doughnutChart3"></canvas>
+                                        <div class="col-12">
+                                            <span class="mb-2">Site Cell</span>
+                                            <!--begin::Chart-->
+                                            <canvas id="chart" height="150"></canvas>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -342,7 +387,7 @@
                         <div class="col">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link" id=" payload" data-toggle="tab" href="#payload" role="tab" aria-controls="payload" aria-selected="true">Payload</a>
+                                    <a class="nav-link active" id=" payload" data-toggle="tab" href="#payload" role="tab" aria-controls="payload" aria-selected="true">Payload</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="throu-tab" data-toggle="tab" href="#throughput" role="tab" aria-controls="throughput" aria-selected="false">Throughput</a>
@@ -786,6 +831,7 @@
 <?php $this->view('template/_jsresource'); ?>
 <!-- Own Javascript Here -->
 <script>
+    var base_url = "<?= base_url() ?>"
     // Formatter
     function nFormatter(num, digits) {
         var si = [{
@@ -826,8 +872,6 @@
         }
         return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
     }
-</script>
-<script>
     // Tooltips Initialization
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
@@ -952,9 +996,30 @@
     if (nv_delta < 0) {
         $('#netavail-persen').css("color", "red");
         $('#netavail-icon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else if (nv_delta == 0) {
+        $('#netavail-persen').css("color", "DarkOrange");
+        $('#netavail-icon').html('<i class="fas fa-minus-circle float-right" style="font-size:40px;color:DarkOrange"></i>');
     } else {
         $('#netavail-persen').css("color", "forestgreen");
         $('#netavail-icon').html(`
+            <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
+            `);
+    }
+    nv_nowweek = parseFloat(datanetavailability[datanetavailability.length - 1].threeg);
+    nv_lastweek = parseFloat(datanetavailability[datanetavailability.length - 2].threeg);
+    nv_delta = nv_nowweek - nv_lastweek;
+    $('#netavail-3gpersen').text(nv_delta.toFixed(2) + " %");
+    total = parseFloat(datanetavailability[datanetavailability.length - 1].threeg);
+    $('#netavail-3gsum').text(nFormatter(total, 2) + " %");
+    if (nv_delta < 0) {
+        $('#netavail-3gpersen').css("color", "red");
+        $('#netavail-3gicon').html('<i class="fas fa-chevron-circle-down float-right" style="font-size:40px;color:red"></i>');
+    } else if (nv_delta == 0) {
+        $('#netavail-3gpersen').css("color", "yellow");
+        $('#netavail-3gicon').html('<i class="fas fa-minus-circle float-right" style="font-size:40px;color:red"></i>');
+    } else {
+        $('#netavail-3gpersen').css("color", "forestgreen");
+        $('#netavail-3gicon').html(`
             <i class="fas fa-chevron-circle-up float-right" style="font-size:40px;color:forestgreen"></i>
             `);
     }
@@ -964,6 +1029,7 @@
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/gauge.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>assets/js/gauge.min.js"></script>
 <script>
+
     var base_url = "<?= base_url() ?>"
 
     $(document).ready(function() {
@@ -1148,37 +1214,335 @@
             }
         });
     });
+
     $('#sidebar li').click(function() {
         if ($('#sidebar').hasClass("active")) {
             $('#sidebar').removeClass("active");
             $(".togname").show();
         }
     });
+    var state = {
+        seleted_region: "",
+        weeks_xaxis: ""
+    };
+    var dataz = []
+    var dump = []
+    var weeks = []
+    var res = ["Kalisumapa", "Sumatera", "Jabotabek", "East Java & Bali Nusra", "Central & West Java"]
+    res.forEach(function(item, index) {
+        res[item] = {}
+        res[item]["count_of_gsm_nb_cell_active"] = []
+        res[item]["count_of_umts_nb_cell_active"] = []
+        res[item]["count_of_lte_nb_cell_active"] = []
+        res[item]["count_of_site_id"] = []
+    });
+    console.log(res);
     $(document).ready(function() {
+        my_maps();
         get_app_name();
-        if (!$("nav").hasClass("active")) {
-            $(".togname").show();
-        } else {
-            $(".togname").hide();
-        }
-        $("#sidebarCollapse").on("click", function() {
-            $("#sidebar").toggleClass("active");
-            if (!$("nav").hasClass("active")) {
-                $(".togname").show();
-            } else {
-                $(".togname").hide();
+
+
+    });
+    d3.csv(base_url + "assets/csv/site_cell_per_band_2020_w46.csv").then(function(data) {
+        // console.log(data.length);
+        data.forEach(function(item, index) {
+            if (weeks.includes(item.week) == false) {
+                weeks.push(item.week)
             }
         });
-        $("#sidebarCollapse2").on("click", function() {
-            $("#sidebar").toggleClass("active");
-            if (!$("nav").hasClass("active")) {
-                $(".togname").show()
-            } else {
-                $(".togname").hide();
+        weeks.forEach(function(item, index) {
+            dump[item] = []
+        });
+        data.forEach(function(item, index) {
+            dump[item.week][item.row_labels] = {
+                count_of_gsm_nb_cell_active: item.count_of_gsm_nb_cell_active,
+                count_of_umts_nb_cell_active: item.count_of_umts_nb_cell_active,
+                count_of_lte_nb_cell_active: item.count_of_lte_nb_cell_active,
+                count_of_site_id: item.count_of_site_id,
             }
         });
 
+
+        // console.log(dump)
     });
+    d3.csv(base_url + "assets/csv/site_cell_per_band_2020_w46.csv").then(function(data) {
+        // console.log(data.length);
+        data.forEach(function(item, index) {
+            if (weeks.includes(item.week) == false) {
+                weeks.push(item.week)
+            }
+        });
+        weeks.forEach(function(item, index) {
+            dataz[item] = []
+        });
+        data.forEach(function(item, index) {
+            dataz[item.week][item.row_labels] = {
+                count_of_gsm_nb_cell_active: item.count_of_gsm_nb_cell_active,
+                count_of_umts_nb_cell_active: item.count_of_umts_nb_cell_active,
+                count_of_lte_nb_cell_active: item.count_of_lte_nb_cell_active,
+                count_of_site_id: item.count_of_site_id,
+            }
+        });
+        // console.log(dataz)
+        // let kalisumapa
+        // dataz.forEach(function(item, index) {
+        for (const [key, value] of Object.entries(dataz)) {
+            // do something with `key` and `value`
+            for (const [keyz, valuez] of Object.entries(dataz[key])) {
+                // do something with `key` and `value`
+                res[keyz]["count_of_gsm_nb_cell_active"].push(valuez["count_of_gsm_nb_cell_active"]);
+                res[keyz]["count_of_umts_nb_cell_active"].push(valuez["count_of_umts_nb_cell_active"]);
+                res[keyz]["count_of_lte_nb_cell_active"].push(valuez["count_of_lte_nb_cell_active"]);
+                res[keyz]["count_of_site_id"].push(valuez["count_of_site_id"]);
+            }
+        }
+        console.log(res)
+        // })
+        reloadChart("Kalisumapa")
+    });
+
+
+    function my_maps() {
+        var code_EAST_JAVA_BALI_NUSRA = ["path15", "path17", "path18", "path19"];
+        var code_CENTRAL_WEST_JAVA = ["path12", "path13", "path16"];
+        var code_JABODETABEK = ["path11"];
+        var code_KALISUMAPA = [
+            "path20",
+            "path21",
+            "path22",
+            "path23",
+            "path24",
+            "path25",
+            "path26",
+            "path27",
+            "path28",
+            "path29",
+            "path30",
+            "path33",
+            "path34",
+        ];
+        var code_SUMATERA = [
+            "path01",
+            "path02",
+            "path03",
+            "path04",
+            "path05",
+            "path06",
+            "path07",
+            "path08",
+            "path09",
+            "path10",
+        ];
+
+        let colorSeleceted = "#14274e";
+        const regionArray = [code_EAST_JAVA_BALI_NUSRA, code_CENTRAL_WEST_JAVA, code_JABODETABEK, code_KALISUMAPA, code_SUMATERA]
+        const colorRegion = ["#c9dfaf", "#edf285", "#adb36e", "#ec5858", "#ffa45b", "#2d6187"];
+        let colors_region = {};
+        for (i = 0; i <= 4; i++) {
+            colors_region = Object.assign(colors_region, changeColorRegion(regionArray[i], colorRegion[i]))
+        }
+
+        $('#vmap').vectorMap({
+            map: 'indonesia_id',
+            backgroundColor: '#ffffff',
+            color: '#333333',
+            colors: colors_region,
+            enableZoom: true,
+            showTooltip: true,
+            selectedColor: null,
+            hoverColor: null,
+            onRegionClick: function(event, code, region) {
+                event.preventDefault();
+                myChart.destroy();
+                reloadChart(state.region_selected)
+            },
+            onRegionOver: function(element, code, region) {
+                state.region_selected = "0";
+                if (code_EAST_JAVA_BALI_NUSRA.indexOf(code) !== -1) {
+                    state.region_selected = "East Java & Bali Nusra";
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_EAST_JAVA_BALI_NUSRA, colorSeleceted));
+                } else {
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_EAST_JAVA_BALI_NUSRA, colorRegion[0]));
+                }
+                if (code_CENTRAL_WEST_JAVA.indexOf(code) !== -1) {
+                    state.region_selected = "Central & West Java";
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_CENTRAL_WEST_JAVA, colorSeleceted));
+                } else {
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_CENTRAL_WEST_JAVA, colorRegion[1]));
+                }
+                if (code_JABODETABEK.indexOf(code) !== -1) {
+                    state.region_selected = "Jabotabek";
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_JABODETABEK, colorSeleceted));
+                } else {
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_JABODETABEK, colorRegion[2]));
+                }
+                if (code_KALISUMAPA.indexOf(code) !== -1) {
+                    state.region_selected = "Kalisumapa";
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_KALISUMAPA, colorSeleceted));
+                } else {
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_KALISUMAPA, colorRegion[3]));
+                }
+                if (code_SUMATERA.indexOf(code) !== -1) {
+                    state.region_selected = "Sumatera";
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_SUMATERA, colorSeleceted));
+                } else {
+                    $("#vmap").vectorMap("set", "colors", changeColorRegion(code_SUMATERA, colorRegion[4]));
+                }
+            },
+            onLabelShow: function(event, label, code_kota) {
+                if (code_EAST_JAVA_BALI_NUSRA.indexOf(code_kota) !== -1) {
+                    label.html("EAST_JAVA_BALI_NUSRA");
+                    return
+                }
+                if (code_CENTRAL_WEST_JAVA.indexOf(code_kota) !== -1) {
+                    label.html("CENTRAL_WEST_JAVA");
+                    return
+                }
+                if (code_JABODETABEK.indexOf(code_kota) !== -1) {
+                    label.html("JABODETABEK");
+                    return
+                }
+                if (code_KALISUMAPA.indexOf(code_kota) !== -1) {
+                    label.html("KALISUMAPA");
+                    return
+                }
+                if (code_SUMATERA.indexOf(code_kota) !== -1) {
+                    label.html("SUMATERA");
+                    return
+                }
+                event.preventDefault();
+
+
+            }
+        });
+        // $("#vmap").vectorMap({
+        //     map: "indonesia_id",
+        //     backgroundColor: '#ffffff',
+        //     color: '#333333',
+        //     colors: SUMATERA,
+        //     enableZoom: false,
+        //     // hoverColor: "#c9dfaf",
+        //     // hoverOpacity: null,
+        //     // normalizeFunction: "linear",
+        //     // scaleColors: ["#b6d6ff", "#005ace"],
+        //     // selectedColor: "#c9dfaf",
+        //     selectedRegions: null,
+        //     multiSelectRegion: false,
+        //     showTooltip: true,
+        //     onRegionClick: function(element, code_kota, region) {
+        //         event.preventDefault();
+        //         // console.log(state_seleted);                
+        //         reloadDataLevelSubscriber(state.region_selected);
+        //         reloadDataAppLevel();
+        //         reloadAppLevelCei();
+        //     },
+        //     onLabelShow: function(event, label, code_kota) {
+        //         $(".jqvmap-region").attr("fill", "#FFFFFF");
+        //         let label2 = code_EAST_JAVA_BALI_NUSRA.some(function(dt, index) {
+        //             return dt == code_kota;
+        //         });
+        //         if (label2 == true) {
+        //             state.region_selected = "region1";
+        //             label.html("EAST_JAVA_BALI_NUSRA");
+        //             $("#vmap").vectorMap("set", "colors", EAST_JAVA_BALI_NUSRA);
+        //         } else {
+        //             label2 = code_CENTRAL_WEST_JAVA.some(function(dt, index) {
+        //                 return dt == code_kota;
+        //             });
+        //             if (label2 == true) {
+        //                 state.region_selected = "region2";
+        //                 label.html("CENTRAL_WEST_JAVA");
+        //                 $("#vmap").vectorMap("set", "colors", CENTRAL_WEST_JAVA);
+        //             } else {
+        //                 label2 = code_JABODETABEK.some(function(dt, index) {
+        //                     return dt == code_kota;
+        //                 });
+        //                 if (label2 == true) {
+        //                     state.region_selected = "region3";
+        //                     label.html("JABODETABEK");
+        //                     $("#vmap").vectorMap("set", "colors", JABODETABEK);
+        //                 } else {
+        //                     label2 = code_KALISUMAPA.some(function(dt, index) {
+        //                         return dt == code_kota;
+        //                     });
+        //                     if (label2 == true) {
+        //                         state.region_selected = "region4";
+        //                         label.html("KALISUMAPA");
+        //                         $("#vmap").vectorMap("set", "colors", KALISUMAPA);
+        //                     } else {
+        //                         label2 = code_SUMATERA.some(function(dt, index) {
+        //                             return dt == code_kota;
+        //                         });
+        //                         // console.log(label2)
+        //                         if (label2 == true) {
+        //                             state.region_selected = "region5";
+        //                             label.html("SUMATERA");
+        //                             $("#vmap").vectorMap("set", "colors", SUMATERA);
+        //                         } else {
+        //                             state.region_selected = "";
+        //                             event.preventDefault();
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     },
+        // });
+    }
+
+    function reloadChart(region) {
+        console.log(region)
+        console.log(dataz["W46"][region].count_of_gsm_nb_cell_active);
+        let options = {
+            type: 'bar',
+            data: {
+                labels: weeks,
+                datasets: [{
+                        label: 'GSM',
+                        data: res[region]["count_of_gsm_nb_cell_active"],
+                        backgroundColor: '#af2d2d',
+                    },
+                    {
+                        label: 'UMTS',
+                        data: res[region]["count_of_umts_nb_cell_active"],
+                        backgroundColor: '#f9813a',
+                    },
+                    {
+                        label: 'LTE',
+                        data: res[region]["count_of_lte_nb_cell_active"],
+                        backgroundColor: '#f1e189',
+                    }, {
+                        label: 'Site ID',
+                        data: res[region]["count_of_site_id"],
+                        backgroundColor: '#cee397',
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        };
+
+
+        var ctx = document.getElementById('chart');
+
+        myChart = new Chart(ctx, options);
+    }
+
+    function changeColorRegion(region, color) {
+        let obj_new = {};
+        region.forEach(element => {
+            obj_new[element] = color;
+        });
+        return obj_new;
+    }
 
     function get_app_name() {
         var baseurl = '<?php echo base_url() ?>';
