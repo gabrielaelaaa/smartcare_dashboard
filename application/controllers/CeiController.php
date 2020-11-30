@@ -57,7 +57,7 @@ class CeiController extends CI_Controller
 
         $dataCellLevelCei = $this->model->getChartCeiPerRegion();
         $dataSubscriber = $this->model->getSubcriberLevelCei();
-        $dataAppCeiSiteLevel = $this->model->getDataAppCeiSiteLevel();
+        $dataAppCeiSiteLevel = $this->model->getDataAppLevelCei();
 
         for ($x = 0; $x < 4; $x++) {
             $weeks[$x] = $week;
@@ -73,7 +73,7 @@ class CeiController extends CI_Controller
         ]);
     }
 
-    public function getDataSubscriberCeiRegion()
+    public function getDataCellLevelCei()
     {
         $region = $this->input->post('region');
         // echo $region;
@@ -115,47 +115,6 @@ class CeiController extends CI_Controller
         // die;
     }
 
-    public function getDataAppCeiSiteLevel()
-    {
-        $region = $this->input->post('region');
-        // echo $region;
-        // die;
-        $status = false;
-        switch ($region) {
-            case "region1":
-                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("EAST JAVA_BALI NUSRA");
-                $status = $dataSubscriber['status'];
-                break;
-            case "region2":
-                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("CENTRAL_WEST JAVA");
-                $status = $dataSubscriber['status'];
-                break;
-            case "region3":
-                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("JABOTABEK");
-                $status = $dataSubscriber['status'];
-                break;
-            case "region4":
-                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("KALISUMAPA");
-                $status = $dataSubscriber['status'];
-                break;
-            case "region5":
-                $dataSubscriber = $this->model->getDataAppCeiSiteLevel("SUMATERA");
-                $status = $dataSubscriber['status'];
-                break;
-            default:
-                $dataSubscriber['msg'] = "Region tidak ditemukan";
-        }
-
-        $res = [
-            "status" => $status,
-            "msg" => $status == false ? $dataSubscriber['msg'] : "",
-            "data" => $status == true ? $dataSubscriber['data'] : "",
-        ];
-        // $res = $region != null ? $this->model->getChartCeiPerRegion($region) : "data tidak di temukan";
-        echo json_encode($res);
-        // var_dump($data['data']);
-        // die;
-    }
     public function getSubcriberLevelCei()
     {
         $region = $this->input->post('region');
@@ -198,8 +157,56 @@ class CeiController extends CI_Controller
         // die;
     }
 
+    public function getDataAppLevelCei()
+    {
+        $region = $this->input->post('region');
+        $week = $this->input->post('week');
+        // echo $region;
+        // die;
+        $status = false;
+        switch ($region) {
+            case "region1":
+                $dataSubscriber = $this->model->getDataAppLevelCei("EAST JAVA_BALI NUSRA",$week);
+                $status = $dataSubscriber['status'];
+                break;
+            case "region2":
+                $dataSubscriber = $this->model->getDataAppLevelCei("CENTRAL_WEST JAVA",$week);
+                $status = $dataSubscriber['status'];
+                break;
+            case "region3":
+                $dataSubscriber = $this->model->getDataAppLevelCei("JABOTABEK",$week);
+                $status = $dataSubscriber['status'];
+                break;
+            case "region4":
+                $dataSubscriber = $this->model->getDataAppLevelCei("KALISUMAPA",$week);
+                $status = $dataSubscriber['status'];
+                break;
+            case "region5":
+                $dataSubscriber = $this->model->getDataAppLevelCei("SUMATERA",$week);
+                $status = $dataSubscriber['status'];
+                break;
+            default:
+                $dataSubscriber = $this->model->getDataAppLevelCei("",$week);
+                $status = $dataSubscriber['status'];
+                break;
+        }
+
+        $res = [
+            "status" => $status,
+            "msg" => $status == false ? $dataSubscriber['msg'] : "",
+            "data" => $status == true ? $dataSubscriber['data'] : "",
+        ];
+        // $res = $region != null ? $this->model->getChartCeiPerRegion($region) : "data tidak di temukan";
+        echo json_encode($res);
+        // var_dump($data['data']);
+        // die;
+    }
+   
+
     public function getDataAppLevel()
     {
+        $region = $this->input->get('region');
+        $week = $this->input->get('week');
         $data = $this->model->getDataAppCeiSiteLevel();
         $res = [
             'status' => true,
@@ -214,6 +221,13 @@ class CeiController extends CI_Controller
         $ddate = date("Y-m-d");
         $date = new DateTime($ddate);
         $week = (int)$date->format("W");
+
+        $date1 = date( "Y-m-d", strtotime("2020"."W48"."1") );
+        $date2 = date("Y-m-d", strtotime($date1. ' Thursday'));
+        echo $date2;
+        echo "<br>";
+        $date_first = date("Y-m-d", strtotime($date2 . '-1 Thursday'));
+        echo $date_first;
 
         $week_now = date('Y-m-d');
         $week_minus1 = date('Y-m-d', strtotime('-1 Thursday'));
@@ -239,12 +253,15 @@ class CeiController extends CI_Controller
         $query_minus3 = "select AVG(promoter) as promoter, AVG(passive) as passive, AVG(detractor) as detractor from cell_level_cei_5region clcr 
             where daily between date '" . $week_minus4 . "' and date '" . $week_minus3 . "'";
 
-        echo $query_week_now;
-        echo "<br>";
-        echo $query_minus1; 
-        echo "<br>";
-        echo $query_minus2; 
-        echo "<br>";
-        echo $query_minus3; 
+        // echo $query_week_now;
+        // echo "<br>";
+        // echo $query_minus1; 
+        // echo "<br>";
+        // echo $query_minus2; 
+        // echo "<br>";
+        // echo $query_minus3; 
     }
+
+    // public function getDataAppLevel
 }
+

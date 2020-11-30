@@ -23,7 +23,7 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('M_dashboard');
-		if($this->session->userdata('logged_in')!=TRUE) {
+		if ($this->session->userdata('logged_in') != TRUE) {
 			redirect(base_url('login'), 'refresh');
 		}
 	}
@@ -35,16 +35,15 @@ class Dashboard extends CI_Controller
 		// $this->load->view('dashboard', $data);
 		$data = [
 
-            'username' => $this->session->userdata('username'),
-            'role' => $this->session->userdata('role'),
-            'konten' => 'dashboard',
-            'title' => 'Dashboard',
-            'natsubscriber'=> json_encode($this->M_dashboard->national_subscribers(11)->result()),
-            'voicetraffic'=> json_encode($this->M_dashboard->voice_traffic_erlang(11)->result()),
-            'networkavailability'=> json_encode($this->M_dashboard->network_availability(11)->result())
-        ];
-        $this->load->view('template/layout', $data);
-
+			'username' => $this->session->userdata('username'),
+			'role' => $this->session->userdata('role'),
+			'konten' => 'dashboard',
+			'title' => 'Dashboard',
+			'natsubscriber' => json_encode($this->M_dashboard->national_subscribers(11)->result()),
+			'voicetraffic' => json_encode($this->M_dashboard->voice_traffic_erlang(11)->result()),
+			'networkavailability' => json_encode($this->M_dashboard->network_availability(11)->result())
+		];
+		$this->load->view('template/layout', $data);
 	}
 	public function network_availability()
 	{
@@ -78,5 +77,24 @@ class Dashboard extends CI_Controller
 		// echo $date;
 		$data = $this->M_dashboard->get_top10app($date);
 		echo json_encode($data);
+	}
+	public function loadData()
+	{
+		$ddate = date("Y-m-d");
+		$date = new DateTime($ddate);
+		$week = (int)$date->format("W");
+		$weeks = [];
+
+		$gettotaltraffic = $this->M_dashboard->gettotaltraffic();
+
+		// for ($x = 0; $x < 4; $x++) {
+		// 	$weeks[$x] = $week;
+		// 	$week--;
+		// }
+		// sort($weeks);
+		echo json_encode([
+			'status' => false,
+			'gettotaltraffic' => $gettotaltraffic
+		]);
 	}
 }

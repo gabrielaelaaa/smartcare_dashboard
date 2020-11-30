@@ -41,3 +41,5 @@
 <script src="<?= base_url('assets/admin-LTE3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/admin-LTE3/dist/js/adminlte.js') ?>"></script>
+<!-- gauge -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
