@@ -159,7 +159,43 @@ var chartDataTraffic = new Chart('lineChart4', {
         }
     }
 });
-
+var chartSMStraffic = new Chart('lineChartsms', {
+    type: 'line',
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+                label: "My First dataset",
+                data: [65, 59, 80, 81, 56, 55, 40],
+                pointRadius: 1,
+                backgroundColor: [
+                    'rgba(105, 0, 132, .0)',
+                ],
+                borderColor: [
+                    'rgba(200, 99, 132, .7)',
+                ],
+                borderWidth: 2
+            },
+            {
+                label: "My Second dataset",
+                data: [28, 48, 40, 19, 86, 27, 90],
+                pointRadius: 1,
+                backgroundColor: [
+                    'rgba(0, 137, 132, .0)',
+                ],
+                borderColor: [
+                    'rgba(0, 10, 130, .7)',
+                ],
+                borderWidth: 2
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            display: false
+        }
+    }
+});
 var chartNetworkAvailability = new Chart('lineChart5', {
     type: 'line',
     data: {

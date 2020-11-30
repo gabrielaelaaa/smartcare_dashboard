@@ -15,8 +15,8 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Voice</strong>
-                                        <small class="db text-muted">4,78 MErl</small>
+                                        <strong class="db">Data</strong>
+                                        <small class="db text-muted">4,78 TBytes</small>
                                     </div>
                                     <div class="col pl-0">
                                         <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
@@ -40,7 +40,7 @@
                             <div class='custom1'>
                                 <div class="row">
                                     <div class="col pr-0">
-                                        <strong class="db">Traffic Total</strong>
+                                        <strong class="db">Voice</strong>
                                         <small id="voicetotal-sum" class="db text-muted">53.518
                                             Erlang</small>
                                     </div>
@@ -81,7 +81,34 @@
                     <canvas id="lineChart" height="180"></canvas>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <span class="mb-2">Network Availability</span>
+                <span class="mb-2">SMS Traffic</span>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class='custom1'>
+                                <div class="row">
+                                    <div class="col pr-0">
+                                        <strong class="db">SMS</strong>
+                                        <small id="netavail-sum" class="db text-muted">53.518
+                                            Erlang</small>
+                                    </div>
+                                    <div class="col pl-0">
+                                        <div id="netavail-icon">
+                                            <i class="fas fa-question-circle float-right" style="font-size:40px;color:orange"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <span id="netavail-persen" class="db persen voiceerlang">0.28
+                                            %</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="lineChartsms" height="180"></canvas>
+                </div>
+                    <!-- <span class="mb-2">Network Availability</span>
                     <div class="row mb-3">
                         <div class="col-6">
                             <div class='custom1'>
@@ -129,7 +156,7 @@
                         </div>
                     </div>
                     <canvas id="lineChart5" height="180"></canvas>
-                </div>
+                </div> -->
                 <div class="col-md-6 col-lg-3">
                     <span class="mb-2">National Subscriber</span>
                     <div class="row mb-3">
@@ -181,7 +208,7 @@
 
                 </div>
                 <div class="col-12 text-center">
-                <small class="text-muted">All percentages compared to yesterday</small>
+                    <small class="text-muted">All percentages compared to yesterday</small>
                 </div>
             </div>
         </div>
@@ -936,6 +963,15 @@
     var dataz = []
     var dump = []
     var weeks = []
+    var res = ["Kalisumapa", "Sumatera", "Jabotabek", "East Java & Bali Nusra", "Central & West Java"]
+    res.forEach(function(item, index) {
+        res[item] = {}
+        res[item]["count_of_gsm_nb_cell_active"] = []
+        res[item]["count_of_umts_nb_cell_active"] = []
+        res[item]["count_of_lte_nb_cell_active"] = []
+        res[item]["count_of_site_id"] = []
+    });
+    console.log(res);
     $(document).ready(function() {
         my_maps();
         get_app_name();
@@ -960,8 +996,9 @@
                 count_of_site_id: item.count_of_site_id,
             }
         });
-        
-        console.log(dump)
+
+
+        // console.log(dump)
     });
     d3.csv(base_url + "assets/csv/site_cell_per_band_2020_w46.csv").then(function(data) {
         // console.log(data.length);
@@ -981,52 +1018,22 @@
                 count_of_site_id: item.count_of_site_id,
             }
         });
-        console.log(dataz)
+        // console.log(dataz)
         // let kalisumapa
         // dataz.forEach(function(item, index) {
-            
-        // })
-        let options = {
-            type: 'bar',
-            data: {
-                labels: weeks,
-                datasets: [{
-                        label: 'GSM',
-                        data: [dataz["W46"]["Kalisumapa"].count_of_gsm_nb_cell_active],
-                        backgroundColor: '#af2d2d',
-                    },
-                    {
-                        label: 'UMTS',
-                        data: [dataz["W46"]["Kalisumapa"].count_of_umts_nb_cell_active],
-                        backgroundColor: '#f9813a',
-                    },
-                    {
-                        label: 'LTE',
-                        data: [dataz["W46"]["Kalisumapa"].count_of_lte_nb_cell_active],
-                        backgroundColor: '#f1e189',
-                    }, {
-                        label: 'Site ID',
-                        data: [dataz["W46"]["Kalisumapa"].count_of_site_id],
-                        backgroundColor: '#cee397',
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        stacked: true
-                    }],
-                    yAxes: [{
-                        stacked: true
-                    }]
-                }
+        for (const [key, value] of Object.entries(dataz)) {
+            // do something with `key` and `value`
+            for (const [keyz, valuez] of Object.entries(dataz[key])) {
+                // do something with `key` and `value`
+                res[keyz]["count_of_gsm_nb_cell_active"].push(valuez["count_of_gsm_nb_cell_active"]);
+                res[keyz]["count_of_umts_nb_cell_active"].push(valuez["count_of_umts_nb_cell_active"]);
+                res[keyz]["count_of_lte_nb_cell_active"].push(valuez["count_of_lte_nb_cell_active"]);
+                res[keyz]["count_of_site_id"].push(valuez["count_of_site_id"]);
             }
-        };
-
-
-        var ctx = document.getElementById('chart');
-
-        myChart = new Chart(ctx, options);
+        }
+        console.log(res)
+        // })
+        reloadChart("Kalisumapa")
     });
 
 
@@ -1081,6 +1088,7 @@
             hoverColor: null,
             onRegionClick: function(event, code, region) {
                 event.preventDefault();
+                myChart.destroy();
                 reloadChart(state.region_selected)
             },
             onRegionOver: function(element, code, region) {
@@ -1226,21 +1234,21 @@
                 labels: weeks,
                 datasets: [{
                         label: 'GSM',
-                        data: [dataz["W46"][region].count_of_gsm_nb_cell_active],
+                        data: res[region]["count_of_gsm_nb_cell_active"],
                         backgroundColor: '#af2d2d',
                     },
                     {
                         label: 'UMTS',
-                        data: [dataz["W46"][region].count_of_umts_nb_cell_active],
+                        data: res[region]["count_of_umts_nb_cell_active"],
                         backgroundColor: '#f9813a',
                     },
                     {
                         label: 'LTE',
-                        data: [dataz["W46"][region].count_of_lte_nb_cell_active],
+                        data: res[region]["count_of_lte_nb_cell_active"],
                         backgroundColor: '#f1e189',
                     }, {
                         label: 'Site ID',
-                        data: [dataz["W46"][region].count_of_site_id],
+                        data: res[region]["count_of_site_id"],
                         backgroundColor: '#cee397',
                     }
                 ]
