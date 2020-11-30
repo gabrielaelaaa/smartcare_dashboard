@@ -1199,21 +1199,6 @@
         // bar
     });
 
-    jQuery(document).ready(function() {
-        jQuery('#vmap').vectorMap({
-            map: 'indonesia_id',
-            backgroundColor: '#fff',
-            color: '#333',
-            hoverOpacity: 0.7,
-            selectedColor: '#666666',
-            enableZoom: true,
-            showTooltip: true,
-            selectedColor: null,
-            onRegionClick: function(event, code, region) {
-                event.preventDefault();
-            }
-        });
-    });
 
     $('#sidebar li').click(function() {
         if ($('#sidebar').hasClass("active")) {
