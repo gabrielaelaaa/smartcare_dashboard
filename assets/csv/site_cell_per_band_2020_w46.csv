@@ -1,0 +1,6 @@
+week,ne_state,row_labels,count_of_gsm_nb_cell_active,count_of_umts_nb_cell_active,count_of_lte_nb_cell_active,count_of_site_id
+W46,Active,Central & West Java,5348,5173,5344,5578
+W46,Active,East Java & Bali Nusra,4159,3815,4176,4360
+W46,Active,Jabotabek,6441,5971,6814,6985
+W46,Active,Kalisumapa,3668,3307,3601,3904
+W46,Active,Sumatera,3939,3820,3928,4027

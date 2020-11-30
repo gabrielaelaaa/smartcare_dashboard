@@ -274,21 +274,3 @@ var myLineChart = new Chart(ctxD3, {
         }
     }
 });
-
-//MAP
-
-jQuery(document).ready(function () {
-    jQuery('#vmap').vectorMap({
-        map: 'indonesia_id',
-        backgroundColor: '#fff',
-        color: '#31ace8',
-        hoverOpacity: 0.7,
-        selectedColor: '#666666',
-        enableZoom: true,
-        showTooltip: true,
-        selectedColor: null,
-        onRegionClick: function (event, code, region) {
-            event.preventDefault();
-        }
-    });
-});

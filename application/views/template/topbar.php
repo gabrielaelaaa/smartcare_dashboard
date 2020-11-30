@@ -24,7 +24,7 @@
                 Nur Hadli
             </a>
             <div class="dropdown-menu dropdown-menu-sm-right bg-yellow-indosat">
-                <a href="Auth\logout" class="dropdown-item text-center text-black test">
+                <a href="logout" class="dropdown-item text-center text-black test">
                     Log out
                 </a>
                 <a href="#" class="dropdown-item text-center text-black test">
